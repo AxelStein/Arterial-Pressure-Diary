@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name" translatable="false">Blood Pressure Diary</string>
+    <string name="app_name">Blood Pressure Diary</string>
+    <string name="no_data">No data</string>
+    <string name="suffix_ap">mmHg</string>
+    <string name="suffix_pulse">bpm</string>
+    <string name="action_add">Add</string>
+    <string name="hint_systolic">Systolic</string>
+    <string name="hint_diastolic">Diastolic</string>
+    <string name="error_opening">Error opening</string>
+    <string name="hint_pulse">Pulse</string>
+    <string-array name="test">
+        <item>January 2021</item>
+        <item>December 2020</item>
+        <item>November 2020</item>
+    </string-array>
 </resources>
