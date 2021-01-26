@@ -1,6 +1,7 @@
 package com.axel_stein.ap_diary.ui
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -41,4 +42,8 @@ class MainActivity : AppCompatActivity() {
         navController.removeOnDestinationChangedListener(destinationListener)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 }

@@ -1,10 +1,9 @@
 package com.axel_stein.ap_diary.ui.edit_log
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
+import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.FragmentEditLogBinding
 
 class EditLogFragment : Fragment() {
@@ -26,5 +25,15 @@ class EditLogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.fragment_edit_log, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }
