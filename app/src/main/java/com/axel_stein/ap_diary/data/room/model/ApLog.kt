@@ -11,7 +11,9 @@ data class ApLog(
     val diastolic: Int,
 
     @ColumnInfo(name = "date_time")
-    val dateTime: DateTime
+    val dateTime: DateTime,
+
+    val comment: String? = null,
 ) {
     @PrimaryKey(autoGenerate = true)
     var id = 0L

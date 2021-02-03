@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.axel_stein.ap_diary.R
-import com.axel_stein.ap_diary.databinding.FragmentEditLogBinding
+import com.axel_stein.ap_diary.databinding.FragmentEditPulseBinding
 
-class EditLogFragment : Fragment() {
-    private lateinit var binding: FragmentEditLogBinding
+class EditPulseFragment : Fragment() {
+    private lateinit var binding: FragmentEditPulseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class EditLogFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEditLogBinding.inflate(inflater)
+        binding = FragmentEditPulseBinding.inflate(inflater)
         return binding.root
     }
 

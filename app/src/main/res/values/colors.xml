@@ -8,4 +8,12 @@
 
     <color name="p3">#37474F</color>
     <color name="pd3">#263238</color>
+
+    <color name="p4">#3949ab</color>
+    <color name="pd4">#00227b</color>
+
+    <color name="p5">#2196f3</color>
+    <color name="pd5">#0069c0</color>
+
+    <color name="color_red">#F44336</color>
 </resources>

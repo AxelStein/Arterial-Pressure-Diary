@@ -1,41 +1,47 @@
 package com.axel_stein.ap_diary.ui.home
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.axel_stein.ap_diary.R
+import com.axel_stein.ap_diary.databinding.ItemLogBinding
 import com.axel_stein.ap_diary.ui.home.log_items.LogItem
-import kotlin.random.Random
+import com.axel_stein.ap_diary.ui.utils.inflate
+import com.axel_stein.ap_diary.ui.utils.setVisible
 
 class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
     companion object : DiffUtil.ItemCallback<LogItem>() {
         override fun areItemsTheSame(a: LogItem, b: LogItem): Boolean {
-            return a.id() == b.id() && a.type() == a.type()
+            return a.id() == b.id()
         }
 
         override fun areContentsTheSame(a: LogItem, b: LogItem): Boolean {
-            return a.id() == b.id() && a.type() == a.type() // fixme
+            return a.id() == b.id() // fixme
         }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = ItemLogBinding.bind(view)
 
-    private val l = listOf(R.layout.item_log, R.layout.item_date)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val res = Random.nextInt(2).run {
-            l[this]
+        fun setItem(item: LogItem) {
+            binding.title.text = item.title()
+            // binding.title.setTextColor(if (item.error()) 0 else 1)
+            binding.suffix.text = item.suffix()
+            with(item.comment()) {
+                binding.comment.text = this
+                binding.comment.setVisible(isNotEmpty())
+            }
+            binding.time.text = item.time()
         }
-        return ViewHolder(parent.inflate(res))
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(parent.inflate(R.layout.item_log))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.setItem(getItem(position))
     }
-}
-
-private fun ViewGroup.inflate(layoutRes: Int): View {
-    return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }

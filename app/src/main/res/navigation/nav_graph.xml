@@ -9,8 +9,16 @@
         android:name="com.axel_stein.ap_diary.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_add_log"
-            app:destination="@id/edit_log_fragment">
+            android:id="@+id/action_add_ap"
+            app:destination="@id/edit_ap_fragment">
+            <argument
+                android:name="id"
+                android:defaultValue="0L"
+                app:argType="long"/>
+        </action>
+        <action
+            android:id="@+id/action_add_pulse"
+            app:destination="@id/edit_pulse_fragment">
             <argument
                 android:name="id"
                 android:defaultValue="0L"
@@ -18,10 +26,19 @@
         </action>
     </fragment>
     <fragment
-        android:id="@+id/edit_log_fragment"
-        android:name="com.axel_stein.ap_diary.ui.edit_log.EditLogFragment"
+        android:id="@+id/edit_ap_fragment"
+        android:name="com.axel_stein.ap_diary.ui.edit_log.EditApFragment"
         android:label=""
-        tools:layout="@layout/fragment_edit_log">
+        tools:layout="@layout/fragment_edit_ap">
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_pulse_fragment"
+        android:name="com.axel_stein.ap_diary.ui.edit_log.EditPulseFragment"
+        android:label=""
+        tools:layout="@layout/fragment_edit_pulse">
         <argument
             android:name="id"
             app:argType="long" />

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "242f5b793a621add5e1c9170ebfa7c19",
+    "identityHash": "23847df694c43ec4aa875d3e87b33e18",
     "entities": [
       {
         "tableName": "ap_log",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `systolic` INTEGER NOT NULL, `diastolic` INTEGER NOT NULL, `date_time` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `systolic` INTEGER NOT NULL, `diastolic` INTEGER NOT NULL, `date_time` TEXT NOT NULL, `comment` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -31,6 +31,12 @@
             "columnName": "date_time",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "comment",
+            "columnName": "comment",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -44,7 +50,7 @@
       },
       {
         "tableName": "pulse_log",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `value` INTEGER NOT NULL, `date_time` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `value` INTEGER NOT NULL, `date_time` TEXT NOT NULL, `comment` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -63,6 +69,12 @@
             "columnName": "date_time",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "comment",
+            "columnName": "comment",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -78,7 +90,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '242f5b793a621add5e1c9170ebfa7c19')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '23847df694c43ec4aa875d3e87b33e18')"
     ]
   }
 }

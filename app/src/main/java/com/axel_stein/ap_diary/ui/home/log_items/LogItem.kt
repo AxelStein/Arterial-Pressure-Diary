@@ -5,9 +5,11 @@ import org.joda.time.DateTime
 
 interface LogItem {
     fun id(): Long
-    fun type(): Int
-    fun highValue(): Boolean
+    fun error(): Boolean
     fun format(context: Context)
+    fun title(): String
+    fun suffix(): String
+    fun comment(): String
     fun time(): String
     fun dateTime(): DateTime
 }
