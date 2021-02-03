@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="p1">#00695C</color>
+    <color name="pd1">#004D40</color>
+
+    <color name="p2">#4527A0</color>
+    <color name="pd2">#311B92</color>
+
+    <color name="p3">#37474F</color>
+    <color name="pd3">#263238</color>
 </resources>

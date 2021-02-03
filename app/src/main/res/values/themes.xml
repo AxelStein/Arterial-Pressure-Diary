@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ArterialPressureDiary" parent="Theme.MaterialComponents.DayNight.Bridge">
-        <item name="colorPrimary">#009688</item>
+        <item name="colorPrimary">@color/p1</item>
+        <item name="colorPrimaryDark">@color/pd1</item>
         <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryDark</item>
     </style>
 
     <style name="Theme.ArterialPressureDiary.NoActionBar">
@@ -10,6 +12,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.ArterialPressureDiary.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

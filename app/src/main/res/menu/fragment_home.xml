@@ -5,5 +5,10 @@
         android:id="@+id/menu_add"
         android:icon="@drawable/icon_add"
         android:title="@string/action_add"
-        app:showAsAction="always" />
+        app:showAsAction="always">
+        <menu>
+            <item android:id="@+id/menu_add_ap" android:title="@string/action_add_ap"/>
+            <item android:id="@+id/menu_add_pulse" android:title="@string/action_add_pulse"/>
+        </menu>
+    </item>
 </menu>

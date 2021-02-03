@@ -4,6 +4,6 @@
         <item name="colorPrimary">#A7FFEB</item>
     </style>
 
-    <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.ArterialPressureDiary.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
 </resources>
