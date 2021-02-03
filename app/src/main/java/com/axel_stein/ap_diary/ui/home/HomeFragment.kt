@@ -18,6 +18,7 @@ import com.axel_stein.ap_diary.ui.home.log_items.LogItem
 import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.SwipeCallback
 import com.axel_stein.ap_diary.ui.utils.TextHeaderDecor
+import com.google.android.material.color.MaterialColors
 import org.joda.time.DateTime
 import kotlin.random.Random
 
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
         SwipeCallback(requireContext()).apply {
             iconMargin = 16f
             swipeRightEnabled = true
-            setSwipeRightColorRes(R.color.color_red)
+            setSwipeRightColor(MaterialColors.getColor(view, R.attr.colorRemove))
             setSwipeRightIconRes(R.drawable.icon_delete)
             onSwipeRight = {}
         }.also {

@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ArterialPressureDiary" parent="Theme.MaterialComponents.DayNight.Bridge">
-        <item name="colorPrimary">@color/p4</item>
-        <item name="colorPrimaryDark">@color/pd4</item>
+        <item name="colorPrimary">@color/color_primary_day</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark_day</item>
         <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorListBackground">@color/color_list_bg_day</item>
+        <item name="colorListItem">@color/color_list_item_day</item>
+        <item name="toolbarBackgroundColor">@color/toolbar_bg_color_day</item>
+        <item name="colorRemove">@color/color_bg_remove_day</item>
         <!--<item name="android:navigationBarColor">?attr/colorPrimaryDark</item>-->
     </style>
 

@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:layout_marginTop="8dp"
+    android:background="?attr/colorListItem"
     android:gravity="center_vertical"
-    android:background="?android:attr/windowBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:textColor="?android:attr/textColorSecondary"
-    android:text="Пт, 7 июля"/>
+    tools:text="Пт, 7 июля"/>
