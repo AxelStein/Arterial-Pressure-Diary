@@ -18,8 +18,8 @@ interface LogDao {
     @Transaction
     fun getByYearMonth(yearMonth: String): List<Any> {
         val list = ArrayList<Any>()
-        list.add(getApLogsByYearMonth(yearMonth))
-        list.add(getPulseLogsByYearMonth(yearMonth))
+        list.addAll(getApLogsByYearMonth(yearMonth))
+        list.addAll(getPulseLogsByYearMonth(yearMonth))
         return list
     }
 

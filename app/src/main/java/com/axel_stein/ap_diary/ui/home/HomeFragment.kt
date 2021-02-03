@@ -1,38 +1,25 @@
 package com.axel_stein.ap_diary.ui.home
 
 import android.os.Bundle
-import android.util.SparseArray
 import android.view.*
-import androidx.core.util.set
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.axel_stein.ap_diary.R
-import com.axel_stein.ap_diary.data.room.model.ApLog
-import com.axel_stein.ap_diary.data.room.model.PulseLog
 import com.axel_stein.ap_diary.databinding.FragmentHomeBinding
-import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
-import com.axel_stein.ap_diary.ui.home.log_items.LogItem
-import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.SwipeCallback
 import com.axel_stein.ap_diary.ui.utils.TextHeaderDecor
+import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.google.android.material.color.MaterialColors
-import org.joda.time.DateTime
-import kotlin.random.Random
 
 class HomeFragment : Fragment() {
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-    private val headerDecor = TextHeaderDecor(R.layout.item_date).apply {
-        setHeaders(SparseArray<String>().apply {
-            set(0, "Wed 3 feb")
-            set(2, "Mon 1 feb")
-            set(5, "Fri 27 Jan")
-            set(10, "Thu 15 Jan")
-            set(15, "Sun 3 Jan")
-        })
-    }
+    private val adapter = HomeAdapter()
+    private val headerDecor = TextHeaderDecor(R.layout.item_date)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,37 +32,31 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.layoutManager = LinearLayoutManager(context, VERTICAL, false)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(headerDecor)
-
-        val adapter = HomeAdapter()
         binding.recyclerView.adapter = adapter
 
         SwipeCallback(requireContext()).apply {
             iconMargin = 16f
             swipeRightEnabled = true
-            setSwipeRightColor(MaterialColors.getColor(view, R.attr.colorRemove))
+            setSwipeRightColor(MaterialColors.getColor(requireContext(), R.attr.colorRemove, 0))
             setSwipeRightIconRes(R.drawable.icon_delete)
             onSwipeRight = {}
         }.also {
             ItemTouchHelper(it).attachToRecyclerView(binding.recyclerView)
         }
 
-        val items = mutableListOf<LogItem>()
-        for (i in 1..10) {
-            items.add(ApLogItem(ApLog(Random.nextInt(100) + 70, Random.nextInt(60) + 70, DateTime())).apply { format(requireContext()) })
-        }
-        for (i in 1..10) {
-            items.add(PulseLogItem(PulseLog(Random.nextInt(100) + 40, DateTime())).apply { format(requireContext()) })
-        }
-        items.shuffle()
-        adapter.submitList(items)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.items.observe(viewLifecycleOwner, {
+            adapter.submitList(it.list)
+            headerDecor.setHeaders(it.headers)
+            binding.noData.setVisible(it.list.isEmpty())
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

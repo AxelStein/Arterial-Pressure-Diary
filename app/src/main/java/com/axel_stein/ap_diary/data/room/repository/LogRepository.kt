@@ -56,7 +56,10 @@ class LogRepository(private val context: Context, private val db: AppDatabase, p
                             when (it) {
                                 is ApLog -> ApLogItem(it)
                                 is PulseLog -> PulseLogItem(it)
-                                else -> TODO()
+                                else -> {
+                                    emitter.tryOnError(Throwable("Error creating flowable"))
+                                    return@schedule
+                                }
                             }
                         }
                         val list = sort(format(objects).toMutableList())
