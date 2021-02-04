@@ -2,6 +2,6 @@
 <resources>
     <attr format="color|reference" name="colorListBackground"/>
     <attr format="color|reference" name="colorListItem"/>
-    <attr format="color|reference" name="toolbarBackgroundColor"/>
     <attr format="color|reference" name="colorRemove"/>
+    <attr format="color|reference" name="toolbarBackgroundColor"/>
 </resources>
