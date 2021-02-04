@@ -3,15 +3,18 @@ package com.axel_stein.ap_diary.ui.home.log_items
 import android.content.Context
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.data.room.model.PulseLog
+import com.axel_stein.ap_diary.ui.home.log_items.ItemType.PULSE
 import com.axel_stein.ap_diary.ui.utils.formatTime
 
-class PulseLogItem(private val log: PulseLog) : LogItem {
+class PulseLogItem(val log: PulseLog) : LogItem {
     private var title = ""
     private var time = ""
     private var suffix = ""
     private var comment = ""
 
     override fun id() = log.id
+
+    override fun type() = PULSE
 
     override fun error() = false
 

@@ -5,6 +5,7 @@ import org.joda.time.DateTime
 
 interface LogItem {
     fun id(): Long
+    fun type(): ItemType
     fun error(): Boolean
     fun format(context: Context)
     fun title(): String

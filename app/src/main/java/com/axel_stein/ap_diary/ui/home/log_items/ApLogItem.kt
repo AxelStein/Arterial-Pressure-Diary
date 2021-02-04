@@ -3,15 +3,18 @@ package com.axel_stein.ap_diary.ui.home.log_items
 import android.content.Context
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.data.room.model.ApLog
+import com.axel_stein.ap_diary.ui.home.log_items.ItemType.AP
 import com.axel_stein.ap_diary.ui.utils.formatTime
 
-class ApLogItem(private val log: ApLog): LogItem {
+class ApLogItem(val log: ApLog): LogItem {
     private var title = ""
     private var time = ""
     private var suffix = ""
     private var comment = ""
 
     override fun id() = log.id
+
+    override fun type() = AP
 
     override fun error() = false
 

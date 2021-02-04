@@ -7,18 +7,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.ItemLogBinding
+import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
 import com.axel_stein.ap_diary.ui.home.log_items.LogItem
+import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.inflate
 import com.axel_stein.ap_diary.ui.utils.setVisible
 
 class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
     companion object : DiffUtil.ItemCallback<LogItem>() {
         override fun areItemsTheSame(a: LogItem, b: LogItem): Boolean {
-            return a.id() == b.id()
+            return a.id() == b.id() && a.type() == b.type()
         }
 
         override fun areContentsTheSame(a: LogItem, b: LogItem): Boolean {
-            return a.id() == b.id() // fixme
+            return if (a is ApLogItem && b is ApLogItem) {
+                a.id() == b.id() && a.log == b.log
+            } else if (a is PulseLogItem && b is PulseLogItem) {
+                a.id() == b.id() && a.log == b.log
+            } else {
+                true
+            }
         }
     }
 
