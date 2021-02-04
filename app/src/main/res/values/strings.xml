@@ -20,14 +20,21 @@
     <string name="hint_diastolic">Diastolic</string>
     <string name="hint_pulse">Pulse</string>
     <string name="hint_systolic">Systolic</string>
+    <string name="month_apr">April</string>
+    <string name="month_aug">August</string>
+    <string name="month_dec">December</string>
+    <string name="month_feb">February</string>
+    <string name="month_jan">January</string>
+    <string name="month_jul">July</string>
+    <string name="month_jun">June</string>
+    <string name="month_mar">March</string>
+    <string name="month_may">May</string>
+    <string name="month_nov">November</string>
+    <string name="month_oct">October</string>
+    <string name="month_sep">September</string>
     <string name="msg_log_deleted">Log deleted</string>
     <string name="msg_log_saved">Log saved</string>
     <string name="no_data">No data</string>
     <string name="suffix_ap">mmHg</string>
     <string name="suffix_pulse">bpm</string>
-    <string-array name="test">
-        <item>January 2021</item>
-        <item>December 2020</item>
-        <item>November 2020</item>
-    </string-array>
 </resources>

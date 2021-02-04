@@ -6,6 +6,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -53,5 +54,14 @@ fun TextInputEditText.setEditorText(text: String, handleKeyboard: Boolean = true
         } else if (!isFocused) {
             hideKeyboard()
         }
+    }
+}
+
+fun setItemSelectedListener(callback: (position: Int) -> Unit): AdapterView.OnItemSelectedListener {
+    return object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            callback(position)
+        }
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 }

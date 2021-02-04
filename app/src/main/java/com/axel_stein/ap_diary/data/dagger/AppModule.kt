@@ -2,6 +2,7 @@ package com.axel_stein.ap_diary.data.dagger
 
 import android.content.Context
 import androidx.room.Room
+import com.axel_stein.ap_diary.data.AppResources
 import com.axel_stein.ap_diary.data.room.AppDatabase
 import com.axel_stein.ap_diary.data.room.dao.LogDao
 import com.axel_stein.ap_diary.data.room.repository.LogRepository
@@ -32,4 +33,8 @@ class AppModule(private val context: Context) {
     @Provides
     @Singleton
     fun provideRepository(db: AppDatabase, dao: LogDao) = LogRepository(context, db, dao)
+
+    @Provides
+    @Singleton
+    fun provideAppResources() = AppResources(context)
 }

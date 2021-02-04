@@ -25,8 +25,10 @@ interface LogDao {
 
     // 2021-02-01T08:00:00.000Z
     @Query("""
-        SELECT SUBSTR(1, 7) FROM ap_log UNION 
-        SELECT SUBSTR(1, 7) FROM pulse_log
+        SELECT SUBSTR(date_time, 1, 7) AS ym FROM ap_log UNION 
+        SELECT SUBSTR(date_time, 1, 7) AS ym FROM pulse_log
+        GROUP BY ym
+        ORDER BY ym DESC
     """)
     fun getYearMonthList(): Flowable<List<String>>
 }

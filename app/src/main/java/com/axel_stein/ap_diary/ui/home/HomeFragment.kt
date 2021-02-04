@@ -2,6 +2,8 @@ package com.axel_stein.ap_diary.ui.home
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ArrayAdapter
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,14 +16,16 @@ import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
 import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.SwipeCallback
 import com.axel_stein.ap_diary.ui.utils.TextHeaderDecor
+import com.axel_stein.ap_diary.ui.utils.setItemSelectedListener
 import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.google.android.material.color.MaterialColors
-import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
+    private var spinner: AppCompatSpinner? = null
     private val adapter = HomeAdapter()
     private val headerDecor = TextHeaderDecor(R.layout.item_date)
 
@@ -60,13 +64,27 @@ class HomeFragment : Fragment() {
         }.also {
             ItemTouchHelper(it).attachToRecyclerView(binding.recyclerView)
         }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.items.observe(viewLifecycleOwner, {
+        if (activity is YearMonthListCallback) {
+            val callbackActivity = activity as YearMonthListCallback
+            spinner = callbackActivity.getSpinnerView()
+            spinner?.onItemSelectedListener = setItemSelectedListener {
+                viewModel.selectYearMonth(it)
+            }
+        }
+        viewModel.yearMonthListLiveData.observe(viewLifecycleOwner, {
+            spinner?.setVisible(!it.isNullOrEmpty())
+            binding.noData.setVisible(it.isNullOrEmpty())
+            spinner?.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, it).apply {
+                setDropDownViewResource(R.layout.item_popup)
+            }
+            spinner?.setSelection(viewModel.selectedYearMonth)
+        })
+        viewModel.itemsLiveData.observe(viewLifecycleOwner, {
             adapter.submitList(it.list)
             headerDecor.setHeaders(it.headers)
             binding.noData.setVisible(it.list.isEmpty())
@@ -74,9 +92,13 @@ class HomeFragment : Fragment() {
         viewModel.showMessageLiveData.observe(viewLifecycleOwner, {
             val msg = it.getContent()
             if (msg != null) {
-                Snackbar.make(view, msg, BaseTransientBottomBar.LENGTH_SHORT).show()
+                Snackbar.make(view, msg, LENGTH_SHORT).show()
             }
         })
+    }
+
+    interface YearMonthListCallback {
+        fun getSpinnerView(): AppCompatSpinner
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

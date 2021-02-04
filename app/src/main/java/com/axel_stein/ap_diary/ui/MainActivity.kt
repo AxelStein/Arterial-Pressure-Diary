@@ -8,9 +8,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.ActivityMainBinding
+import com.axel_stein.ap_diary.ui.home.HomeFragment
 import com.axel_stein.ap_diary.ui.utils.setVisible
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HomeFragment.YearMonthListCallback {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val destinationListener =
@@ -46,4 +47,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.activity_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+    override fun getSpinnerView() = binding.spinnerDate
 }
