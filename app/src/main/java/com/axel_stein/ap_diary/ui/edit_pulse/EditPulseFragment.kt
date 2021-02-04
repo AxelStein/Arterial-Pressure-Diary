@@ -1,4 +1,4 @@
-package com.axel_stein.ap_diary.ui.edit_log
+package com.axel_stein.ap_diary.ui.edit_pulse
 
 import android.os.Bundle
 import android.view.*

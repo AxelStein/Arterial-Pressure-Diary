@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.FragmentHomeBinding
+import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
+import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.SwipeCallback
 import com.axel_stein.ap_diary.ui.utils.TextHeaderDecor
 import com.axel_stein.ap_diary.ui.utils.setVisible
@@ -36,6 +38,16 @@ class HomeFragment : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.addItemDecoration(headerDecor)
         binding.recyclerView.adapter = adapter
+        adapter.onItemClick = {
+            val action = when (it) {
+                is ApLogItem -> R.id.action_edit_ap
+                is PulseLogItem -> R.id.action_edit_ap
+                else -> 0
+            }
+            findNavController().navigate(action, Bundle().apply {
+                putLong("id", it.id())
+            })
+        }
 
         SwipeCallback(requireContext()).apply {
             iconMargin = 16f

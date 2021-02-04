@@ -22,6 +22,8 @@ class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
         }
     }
 
+    var onItemClick: ((item: LogItem) -> Unit)? = null
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemLogBinding.bind(view)
 
@@ -38,7 +40,11 @@ class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.item_log))
+        return ViewHolder(parent.inflate(R.layout.item_log)).apply {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(getItem(adapterPosition))
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

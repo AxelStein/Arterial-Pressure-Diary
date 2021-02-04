@@ -1,19 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="app_name">Дневник давления</string>
-    <string name="suffix_ap">мм рт.ст.</string>
-    <string name="suffix_pulse">уд/мин</string>
     <string name="action_add">Добавить</string>
-    <string name="hint_systolic">Систолическое</string>
-    <string name="hint_diastolic">Диастолическое</string>
-    <string name="error_opening">Ошибка открытия</string>
-    <string name="hint_pulse">Пульс</string>
-    <string name="action_settings">Настройки</string>
-    <string name="action_save">Сохранить</string>
-    <string name="action_delete">Удалить</string>
-    <string name="action_charts">Графики</string>
-    <string name="no_data">Нет данных</string>
-    <string name="hint_comment">Комментарий</string>
     <string name="action_add_ap">АД</string>
     <string name="action_add_pulse">Пульс</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_charts">Графики</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_settings">Настройки</string>
+    <string name="app_name">Дневник давления</string>
+    <string name="dialog_msg_delete_log">Запись будет удалена навсегда.</string>
+    <string name="dialog_title_confirm">Подтвердите действие</string>
+    <string name="error_deleting">Ошибка удаления</string>
+    <string name="error_field_empty">Заполните это поле</string>
+    <string name="error_loading">Ошибка загрузки</string>
+    <string name="error_opening">Ошибка открытия</string>
+    <string name="error_saving">Ошибка сохранения</string>
+    <string name="hint_comment">Комментарий</string>
+    <string name="hint_diastolic">Диастолическое</string>
+    <string name="hint_pulse">Пульс</string>
+    <string name="hint_systolic">Систолическое</string>
+    <string name="msg_log_deleted">Запись удалена</string>
+    <string name="msg_log_saved">Запись сохранена</string>
+    <string name="no_data">Нет данных</string>
+    <string name="suffix_ap">мм рт.ст.</string>
+    <string name="suffix_pulse">уд/мин</string>
 </resources>
