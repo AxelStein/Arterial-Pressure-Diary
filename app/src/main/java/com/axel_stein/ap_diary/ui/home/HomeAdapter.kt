@@ -1,16 +1,15 @@
 package com.axel_stein.ap_diary.ui.home
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.ItemLogBinding
 import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
 import com.axel_stein.ap_diary.ui.home.log_items.LogItem
 import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
-import com.axel_stein.ap_diary.ui.utils.inflate
 import com.axel_stein.ap_diary.ui.utils.setVisible
 
 class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
@@ -30,10 +29,9 @@ class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
         }
     }
 
-    var onItemClick: ((item: LogItem) -> Unit)? = null
+    var onItemClick: ((item: LogItem, itemView: View) -> Unit)? = null
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemLogBinding.bind(view)
+    class ViewHolder(private val binding: ItemLogBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun setItem(item: LogItem) {
             binding.title.text = item.title()
@@ -48,9 +46,14 @@ class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.inflate(R.layout.item_log)).apply {
+        val binding = ItemLogBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ViewHolder(binding).apply {
             itemView.setOnClickListener {
-                onItemClick?.invoke(getItem(adapterPosition))
+                onItemClick?.invoke(getItem(adapterPosition), itemView)
             }
         }
     }

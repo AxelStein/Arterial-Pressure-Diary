@@ -1,7 +1,10 @@
 package com.axel_stein.ap_diary.ui.edit_ap
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +15,9 @@ import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog.OnConfirmListener
 import com.axel_stein.ap_diary.ui.utils.*
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialSharedAxis.Z
 
 class EditApFragment : Fragment(), OnConfirmListener {
     private var id = 0L
@@ -22,6 +28,16 @@ class EditApFragment : Fragment(), OnConfirmListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         id = arguments?.getLong("id") ?: 0L
+
+        if (id == 0L) {
+            enterTransition = MaterialSharedAxis(Z, /* forward= */ true)
+            returnTransition = MaterialSharedAxis(Z, /* forward= */ false)
+        } else {
+            sharedElementEnterTransition = MaterialContainerTransform().apply {
+                scrimColor = Color.TRANSPARENT
+                duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -30,6 +46,8 @@ class EditApFragment : Fragment(), OnConfirmListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditApBinding.inflate(inflater)
+        ViewCompat.setTransitionName(binding.container, "shared_element_container")
+
         binding.date.setOnClickListener {
             showDatePicker(requireContext(), viewModel.getCurrentDateTime()) { year, month, dayOfMonth ->
                 viewModel.setDate(year, month, dayOfMonth)
@@ -56,6 +74,10 @@ class EditApFragment : Fragment(), OnConfirmListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         viewModel.apLiveData.observe(viewLifecycleOwner, {
             binding.date.text = formatDate(requireContext(), it.dateTime)
             binding.time.text = formatTime(requireContext(), it.dateTime)

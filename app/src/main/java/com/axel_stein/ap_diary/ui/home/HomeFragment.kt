@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.view.ViewCompat
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.FragmentHomeBinding
 import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
+import com.axel_stein.ap_diary.ui.home.log_items.LogItem
 import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.SwipeCallback
 import com.axel_stein.ap_diary.ui.utils.TextHeaderDecor
@@ -21,12 +25,15 @@ import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialSharedAxis.Z
 
 class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private var spinner: AppCompatSpinner? = null
-    private val adapter = HomeAdapter()
+    private val homeAdapter = HomeAdapter()
     private val headerDecor = TextHeaderDecor(R.layout.item_date)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,19 +47,14 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
-        binding.recyclerView.layoutManager = LinearLayoutManager(context, VERTICAL, false)
-        binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.addItemDecoration(headerDecor)
-        binding.recyclerView.adapter = adapter
-        adapter.onItemClick = {
-            val action = when (it) {
-                is ApLogItem -> R.id.action_edit_ap
-                is PulseLogItem -> R.id.action_edit_pulse
-                else -> 0
-            }
-            findNavController().navigate(action, Bundle().apply {
-                putLong("id", it.id())
-            })
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, VERTICAL, false)
+            setHasFixedSize(true)
+            addItemDecoration(headerDecor)
+            adapter = homeAdapter
+        }
+        homeAdapter.onItemClick = { item, itemView ->
+            onLogItemClick(item, itemView)
         }
 
         SwipeCallback(requireContext()).apply {
@@ -67,8 +69,36 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private fun onLogItemClick(item: LogItem, itemView: View) {
+        /*exitTransition = MaterialElevationScale(false).apply {
+            duration = 2000
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = 2000
+        }*/
+        exitTransition = Hold().apply {
+            duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+        }
+        reenterTransition = Hold().apply {
+            duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+        }
+        ViewCompat.setTransitionName(itemView, "shared_element_container")
+        val action = when (item) {
+            is ApLogItem -> R.id.action_edit_ap
+            is PulseLogItem -> R.id.action_edit_pulse
+            else -> 0
+        }
+        findNavController().navigate(action, Bundle().apply {
+            putLong("id", item.id())
+        }, null, FragmentNavigatorExtras(itemView to "shared_element_container"))
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         if (activity is YearMonthListCallback) {
             val callbackActivity = activity as YearMonthListCallback
             spinner = callbackActivity.getSpinnerView()
@@ -85,7 +115,7 @@ class HomeFragment : Fragment() {
             spinner?.setSelection(viewModel.selectedYearMonth)
         })
         viewModel.itemsLiveData.observe(viewLifecycleOwner, {
-            adapter.submitList(it.list)
+            homeAdapter.submitList(it.list)
             headerDecor.setHeaders(it.headers)
             binding.noData.setVisible(it.list.isEmpty())
         })
@@ -109,6 +139,8 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_add_ap -> {
+                exitTransition = MaterialSharedAxis(Z, /* forward= */ true)
+                reenterTransition = MaterialSharedAxis(Z, /* forward= */ false)
                 findNavController().navigate(R.id.action_add_ap)
                 true
             }
