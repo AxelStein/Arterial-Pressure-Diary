@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         adapter.onItemClick = {
             val action = when (it) {
                 is ApLogItem -> R.id.action_edit_ap
-                is PulseLogItem -> R.id.action_edit_ap
+                is PulseLogItem -> R.id.action_edit_pulse
                 else -> 0
             }
             findNavController().navigate(action, Bundle().apply {

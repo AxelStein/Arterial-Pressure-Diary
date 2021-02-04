@@ -7,12 +7,12 @@ import org.joda.time.DateTime
 
 @Entity(tableName = "pulse_log")
 data class PulseLog(
-    val value: Int,
+    var value: Int = 0,
 
     @ColumnInfo(name = "date_time")
-    val dateTime: DateTime,
+    var dateTime: DateTime = DateTime(),
 
-    val comment: String? = null,
+    var comment: String? = null,
 ) {
     @PrimaryKey(autoGenerate = true)
     var id = 0L

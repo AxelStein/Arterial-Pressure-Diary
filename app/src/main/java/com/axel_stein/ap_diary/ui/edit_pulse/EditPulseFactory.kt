@@ -1,4 +1,4 @@
-package com.axel_stein.ap_diary.ui.edit_ap
+package com.axel_stein.ap_diary.ui.edit_pulse
 
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 
 @Suppress("UNCHECKED_CAST")
-class EditApFactory(
+class EditPulseFactory(
     owner: SavedStateRegistryOwner,
     private val id: Long
 ): AbstractSavedStateViewModelFactory(owner, null) {
@@ -14,5 +14,6 @@ class EditApFactory(
         key: String,
         modelClass: Class<T>,
         handle: SavedStateHandle
-    ): T = EditApViewModel(id, handle) as T
+    ): T = EditPulseViewModel(id, handle) as T
+
 }
