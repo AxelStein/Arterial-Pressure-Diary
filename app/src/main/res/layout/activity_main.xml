@@ -23,6 +23,7 @@
                 android:id="@+id/spinner_date"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
+                android:dropDownVerticalOffset="@dimen/dropdown_offset"
                 app:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay"
                 app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay" />
         </androidx.appcompat.widget.Toolbar>
