@@ -3,9 +3,11 @@ package com.axel_stein.ap_diary.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.data.room.repository.LogRepository
 import com.axel_stein.ap_diary.data.room.repository.LogRepository.LogListResult
 import com.axel_stein.ap_diary.ui.App
+import com.axel_stein.ap_diary.ui.utils.Event
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
@@ -13,8 +15,12 @@ import javax.inject.Inject
 class HomeViewModel : ViewModel() {
     private lateinit var repository: LogRepository
     private val disposables = CompositeDisposable()
+
     private val _items = MutableLiveData<LogListResult>()
     val items: LiveData<LogListResult> = _items
+
+    private val showMessage = MutableLiveData<Event<Int>>()
+    val showMessageLiveData: LiveData<Event<Int>> = showMessage
 
     @Inject
     fun inject(r: LogRepository) {
@@ -29,6 +35,7 @@ class HomeViewModel : ViewModel() {
                 _items.postValue(it)
             }, {
                 it.printStackTrace()
+                showMessage.postValue(Event(R.string.error_loading))
             }).also {
                 disposables.add(it)
             }

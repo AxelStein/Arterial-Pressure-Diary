@@ -16,6 +16,8 @@ import com.axel_stein.ap_diary.ui.utils.SwipeCallback
 import com.axel_stein.ap_diary.ui.utils.TextHeaderDecor
 import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -68,6 +70,12 @@ class HomeFragment : Fragment() {
             adapter.submitList(it.list)
             headerDecor.setHeaders(it.headers)
             binding.noData.setVisible(it.list.isEmpty())
+        })
+        viewModel.showMessageLiveData.observe(viewLifecycleOwner, {
+            val msg = it.getContent()
+            if (msg != null) {
+                Snackbar.make(view, msg, BaseTransientBottomBar.LENGTH_SHORT).show()
+            }
         })
     }
 
