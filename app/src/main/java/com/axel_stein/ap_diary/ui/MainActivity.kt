@@ -4,23 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.data.AppSettings
-import com.axel_stein.ap_diary.data.google_drive.DriveWorker
 import com.axel_stein.ap_diary.data.google_drive.GoogleDriveService
 import com.axel_stein.ap_diary.databinding.ActivityMainBinding
 import com.axel_stein.ap_diary.ui.home.HomeFragment
 import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.google.android.material.snackbar.Snackbar
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HomeFragment.YearMonthListCallback {
@@ -28,6 +23,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.YearMonthListCallback {
     private lateinit var navController: NavController
     private val destinationListener =
         NavController.OnDestinationChangedListener { _, destination, _ ->
+            supportActionBar?.setDisplayShowTitleEnabled(destination.id == R.id.main_preferences_fragment)
             binding.spinnerDate.setVisible(destination.id == R.id.home_fragment)
         }
     private lateinit var driveService: GoogleDriveService
@@ -86,7 +82,6 @@ class MainActivity : AppCompatActivity(), HomeFragment.YearMonthListCallback {
 
         when (requestCode) {
             REQUEST_PERMISSIONS_CODE -> {
-                enableAutoSync(true)
                 skip()
                 with(binding.splash) {
                     Snackbar.make(this, R.string.msg_sign_google_success, Snackbar.LENGTH_SHORT).show()
@@ -94,25 +89,6 @@ class MainActivity : AppCompatActivity(), HomeFragment.YearMonthListCallback {
             }
         }
     }
-
-    // fixme
-    fun enableAutoSync(enable: Boolean) {
-        val tag = "$packageName.drive_worker"
-        val wm = WorkManager.getInstance(this)
-        if (enable) {
-            val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build()
-            val request = PeriodicWorkRequestBuilder<DriveWorker>(1, TimeUnit.DAYS)
-                .setConstraints(constraints)
-                .addTag(tag)
-                .build()
-            wm.enqueue(request)
-        } else {
-            wm.cancelAllWorkByTag(tag)
-        }
-    }
-
 
     override fun onResume() {
         super.onResume()
@@ -127,6 +103,16 @@ class MainActivity : AppCompatActivity(), HomeFragment.YearMonthListCallback {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_main, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                navController.navigate(R.id.main_preferences_fragment)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     override fun getSpinnerView() = binding.spinnerDate

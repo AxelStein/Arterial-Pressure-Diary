@@ -1,7 +1,9 @@
 package com.axel_stein.ap_diary.ui.edit_pulse
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,10 +14,13 @@ import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog.OnConfirmListener
 import com.axel_stein.ap_diary.ui.utils.*
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialSharedAxis
+import com.google.android.material.transition.MaterialSharedAxis.Z
 
 class EditPulseFragment : Fragment(), OnConfirmListener {
     private var id = 0L
-    private val viewModel: EditPulseViewModel by viewModels { EditPulseFactory(this, id) }
+    private val viewModel: EditPulseViewModel by viewModels { EditPulseFactory(requireContext(), this, id) }
     private lateinit var binding: FragmentEditPulseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +29,16 @@ class EditPulseFragment : Fragment(), OnConfirmListener {
         id = arguments?.getLong("id") ?: 0L
 
         if (id == 0L) {
-            enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, /* forward= */ true)
-            returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, /* forward= */ false)
+            enterTransition = MaterialSharedAxis(Z, true).apply {
+                duration = resources.getInteger(R.integer.axis_duration).toLong()
+            }
+            returnTransition = MaterialSharedAxis(Z, false).apply {
+                duration = resources.getInteger(R.integer.axis_duration).toLong()
+            }
         } else {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
                 scrimColor = Color.TRANSPARENT
-                duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+                duration = resources.getInteger(R.integer.transform_duration).toLong()
             }
         }
     }

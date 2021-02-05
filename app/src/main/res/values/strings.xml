@@ -11,6 +11,7 @@
     <string name="action_sign_in_google">Sign in with Google</string>
     <string name="action_skip">Skip</string>
     <string name="app_name">Blood Pressure Diary</string>
+    <string name="app_version">1.0.1</string>
     <string name="dialog_msg_delete_log">Log will be deleted permanently.</string>
     <string name="dialog_title_confirm">Confirm action</string>
     <string name="error_deleting">Error deleting</string>
@@ -22,6 +23,16 @@
     <string name="hint_diastolic">Diastolic</string>
     <string name="hint_pulse">Pulse</string>
     <string name="hint_systolic">Systolic</string>
+    <string name="main_pref_app_version_title">App version</string>
+    <string name="main_pref_category_about_app">About app</string>
+    <string name="main_pref_category_backup">Backup</string>
+    <string name="main_pref_category_google" translatable="false">Google Drive</string>
+    <string name="main_pref_export_backup">Export</string>
+    <string name="main_pref_google_sign_in">Sign in</string>
+    <string name="main_pref_google_sign_out">Sign out</string>
+    <string name="main_pref_import_backup">Import</string>
+    <string name="main_pref_rate_app">Rate app</string>
+    <string name="main_pref_theme">Theme</string>
     <string name="month_apr">April</string>
     <string name="month_aug">August</string>
     <string name="month_dec">December</string>
@@ -40,4 +51,10 @@
     <string name="no_data">No data</string>
     <string name="suffix_ap">mmHg</string>
     <string name="suffix_pulse">bpm</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">Follow system</string>
+    <string name="main_pref_google_create_backup">Create backup</string>
+    <string name="main_pref_google_import_backup">Import backup</string>
+    <string name="main_pref_google_last_sync">Last sync</string>
 </resources>

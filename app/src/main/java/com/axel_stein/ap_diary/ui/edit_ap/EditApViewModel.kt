@@ -1,10 +1,16 @@
 package com.axel_stein.ap_diary.ui.edit_ap
 
+import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.axel_stein.ap_diary.R
+import com.axel_stein.ap_diary.data.google_drive.DriveWorker
 import com.axel_stein.ap_diary.data.room.dao.ApLogDao
 import com.axel_stein.ap_diary.data.room.model.ApLog
 import com.axel_stein.ap_diary.ui.App
@@ -18,7 +24,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
 
-class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle) : ViewModel() {
+class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: App) :
+    AndroidViewModel(app) {
+
     private var apData = state.getLiveData<ApLog>("ap")
     val apLiveData: LiveData<ApLog> = apData
 
@@ -155,5 +163,25 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle) : View
                     showMessage.postValue(Event(R.string.error_deleting))
                 }
             )
+    }
+
+    // fixme
+    fun enableAutoSync(enable: Boolean) {
+        val context: Context = getApplication()
+
+        val tag = "${context.packageName}.drive_worker"
+        val wm = WorkManager.getInstance(context)
+        if (enable) {
+            val constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+            val request = OneTimeWorkRequestBuilder<DriveWorker>()
+                .setConstraints(constraints)
+                .addTag(tag)
+                .build()
+            wm.enqueue(request)
+        } else {
+            wm.cancelAllWorkByTag(tag)
+        }
     }
 }

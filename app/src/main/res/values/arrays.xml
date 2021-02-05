@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string-array name="months">
         <item>@string/month_jan</item>
@@ -13,5 +13,15 @@
         <item>@string/month_oct</item>
         <item>@string/month_nov</item>
         <item>@string/month_dec</item>
+    </string-array>
+    <string-array name="theme_entries">
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+        <item>@string/theme_system</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>system</item>
     </string-array>
 </resources>

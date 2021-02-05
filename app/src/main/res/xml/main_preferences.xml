@@ -1,0 +1,100 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ListPreference
+        android:entries="@array/theme_entries"
+        app:defaultValue="system"
+        app:entryValues="@array/theme_values"
+        app:iconSpaceReserved="false"
+        app:key="theme"
+        app:summary="%s"
+        app:title="@string/main_pref_theme"/>
+
+    <PreferenceCategory
+        app:allowDividerAbove="false"
+        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false"
+        app:title="@string/main_pref_category_google">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="google_sign_in"
+            app:title="@string/main_pref_google_sign_in"
+            tools:isPreferenceVisible="true" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="google_create_backup"
+            app:title="@string/main_pref_google_create_backup"
+            tools:isPreferenceVisible="true" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="google_import_backup"
+            app:title="@string/main_pref_google_import_backup"
+            tools:isPreferenceVisible="true" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="google_last_sync"
+            app:title="@string/main_pref_google_last_sync"
+            tools:isPreferenceVisible="true"
+            tools:summary="24 May, 13:30" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="google_sign_out"
+            app:title="@string/main_pref_google_sign_out"
+            tools:isPreferenceVisible="true"
+            tools:summary="diefaust1993@gmail.com" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/main_pref_category_backup">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="export_backup"
+            app:title="@string/main_pref_export_backup" />
+
+        <Preference
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false"
+            app:key="import_backup"
+            app:title="@string/main_pref_import_backup"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/main_pref_category_about_app">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="rate_app"
+            app:title="@string/main_pref_rate_app">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/details?id=com.axel_stein.ap_diary" />
+
+        </Preference>
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="app_version"
+            app:summary="@string/app_version"
+            app:title="@string/main_pref_app_version_title"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

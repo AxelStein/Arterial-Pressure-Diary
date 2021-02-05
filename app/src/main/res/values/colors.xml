@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <color name="color_bg_remove_day">#F44336</color>
-    <color name="color_bg_remove_night">#D50000</color>
+    <color name="color_bg_remove_night">#F44336</color>
     <color name="color_list_bg_day">#eee</color>
     <color name="color_list_bg_night">#303030</color>
     <color name="color_list_item_day">#fff</color>

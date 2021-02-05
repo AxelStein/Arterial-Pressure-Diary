@@ -12,6 +12,10 @@ fun EditText.showKeyboard() {
     post(KeyboardRunnable(this))
 }
 
+fun EditText.showKeyboardDelayed(delay: Int) {
+    postDelayed(KeyboardRunnable(this), delay.toLong())
+}
+
 fun EditText.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
     imm?.hideSoftInputFromWindow(windowToken, 0)

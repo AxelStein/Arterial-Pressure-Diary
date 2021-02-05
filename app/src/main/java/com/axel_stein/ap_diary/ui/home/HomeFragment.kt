@@ -77,10 +77,10 @@ class HomeFragment : Fragment() {
             duration = 2000
         }*/
         exitTransition = Hold().apply {
-            duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+            duration = resources.getInteger(R.integer.transform_duration).toLong()
         }
         reenterTransition = Hold().apply {
-            duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+            duration = resources.getInteger(R.integer.transform_duration).toLong()
         }
         ViewCompat.setTransitionName(itemView, "shared_element_container")
         val action = when (item) {
@@ -139,18 +139,25 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_add_ap -> {
-                exitTransition = MaterialSharedAxis(Z, /* forward= */ true)
-                reenterTransition = MaterialSharedAxis(Z, /* forward= */ false)
+                setupAxisTransition()
                 findNavController().navigate(R.id.action_add_ap)
                 true
             }
             R.id.menu_add_pulse -> {
-                exitTransition = MaterialSharedAxis(Z, /* forward= */ true)
-                reenterTransition = MaterialSharedAxis(Z, /* forward= */ false)
+                setupAxisTransition()
                 findNavController().navigate(R.id.action_add_pulse)
                 true
             }
             else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setupAxisTransition() {
+        exitTransition = MaterialSharedAxis(Z, true).apply {
+            duration = resources.getInteger(R.integer.axis_duration).toLong()
+        }
+        reenterTransition = MaterialSharedAxis(Z, false).apply {
+            duration = resources.getInteger(R.integer.axis_duration).toLong()
         }
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import androidx.core.widget.doAfterTextChanged
+import com.axel_stein.ap_diary.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -50,7 +51,7 @@ fun TextInputEditText.setEditorText(text: String, handleKeyboard: Boolean = true
     }
     if (handleKeyboard) {
         if (text.isBlank()) {
-            showKeyboard()
+            showKeyboardDelayed(resources.getInteger(R.integer.axis_duration))
         } else if (!isFocused) {
             hideKeyboard()
         }

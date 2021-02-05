@@ -21,7 +21,7 @@ import com.google.android.material.transition.MaterialSharedAxis.Z
 
 class EditApFragment : Fragment(), OnConfirmListener {
     private var id = 0L
-    private val viewModel: EditApViewModel by viewModels { EditApFactory(this, id) }
+    private val viewModel: EditApViewModel by viewModels { EditApFactory(requireContext(), this, id) }
     private lateinit var binding: FragmentEditApBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +30,16 @@ class EditApFragment : Fragment(), OnConfirmListener {
         id = arguments?.getLong("id") ?: 0L
 
         if (id == 0L) {
-            enterTransition = MaterialSharedAxis(Z, /* forward= */ true)
-            returnTransition = MaterialSharedAxis(Z, /* forward= */ false)
+            enterTransition = MaterialSharedAxis(Z, true).apply {
+                duration = resources.getInteger(R.integer.axis_duration).toLong()
+            }
+            returnTransition = MaterialSharedAxis(Z, false).apply {
+                duration = resources.getInteger(R.integer.axis_duration).toLong()
+            }
         } else {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
                 scrimColor = Color.TRANSPARENT
-                duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+                duration = resources.getInteger(R.integer.transform_duration).toLong()
             }
         }
     }
