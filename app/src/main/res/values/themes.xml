@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+    <style name="T" parent="Theme.MaterialComponents.DayNight.Bridge">
+
+    </style>
     <style name="Theme.ArterialPressureDiary" parent="Theme.MaterialComponents.DayNight.Bridge">
-        <item name="colorPrimary">@color/color_primary_day</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark_day</item>
-        <item name="colorAccent">@color/color_primary_day</item>
+        <item name="colorPrimary">#00796B</item>
+        <item name="colorPrimaryDark">#757575</item>
+        <item name="colorAccent">#00796B</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="colorListBackground">@color/color_list_bg_day</item>
         <item name="colorListItem">@color/color_list_item_day</item>
@@ -12,7 +15,9 @@
         <item name="colorRemove">@color/color_bg_remove_day</item>
         <!--<item name="android:navigationBarColor">?attr/colorPrimaryDark</item>-->
     </style>
-    <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">#000</item>
+    </style>
     <style name="Theme.ArterialPressureDiary.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

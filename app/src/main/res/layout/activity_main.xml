@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/toolbarBackgroundColor"
-            app:contentInsetStart="4dp"
-            app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay">
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinner_date"
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/actionBarSize"
-                android:dropDownVerticalOffset="@dimen/dropdown_offset"
-                app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay"
-                app:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay" />
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -47,15 +23,15 @@
         android:background="@color/color_splash"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        tools:visibility="gone">
 
         <Button
             android:id="@+id/sign_in_google"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/action_sign_in_google"
             android:backgroundTint="#fff"
+            android:text="@string/action_sign_in_google"
             android:textColor="#000"
             app:layout_constraintBottom_toTopOf="@+id/skip"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,4 +53,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

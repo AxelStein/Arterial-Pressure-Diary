@@ -1,9 +1,10 @@
 package com.axel_stein.ap_diary.ui.home
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
@@ -32,14 +33,8 @@ import com.google.android.material.transition.MaterialSharedAxis.Z
 class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
-    private var spinner: AppCompatSpinner? = null
     private val homeAdapter = HomeAdapter()
     private val headerDecor = TextHeaderDecor(R.layout.item_date)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +42,30 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
+        // binding.toolbar.inflateMenu(R.menu.fragment_home)
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_settings -> {
+                    findNavController().navigate(R.id.main_preferences_fragment)
+                    true
+                }
+
+                R.id.menu_add_ap -> {
+                    setupAxisTransition()
+                    findNavController().navigate(R.id.action_add_ap)
+                    true
+                }
+
+                R.id.menu_add_pulse -> {
+                    setupAxisTransition()
+                    findNavController().navigate(R.id.action_add_pulse)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, VERTICAL, false)
             setHasFixedSize(true)
@@ -55,6 +74,9 @@ class HomeFragment : Fragment() {
         }
         homeAdapter.onItemClick = { item, itemView ->
             onLogItemClick(item, itemView)
+        }
+        binding.spinnerDate.onItemSelectedListener = setItemSelectedListener {
+            viewModel.selectYearMonth(it)
         }
 
         SwipeCallback(requireContext()).apply {
@@ -99,20 +121,13 @@ class HomeFragment : Fragment() {
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
 
-        if (activity is YearMonthListCallback) {
-            val callbackActivity = activity as YearMonthListCallback
-            spinner = callbackActivity.getSpinnerView()
-            spinner?.onItemSelectedListener = setItemSelectedListener {
-                viewModel.selectYearMonth(it)
-            }
-        }
         viewModel.yearMonthListLiveData.observe(viewLifecycleOwner, {
-            spinner?.setVisible(!it.isNullOrEmpty())
+            binding.spinnerDate.setVisible(!it.isNullOrEmpty())
             binding.noData.setVisible(it.isNullOrEmpty())
-            spinner?.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, it).apply {
+            binding.spinnerDate.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, it).apply {
                 setDropDownViewResource(R.layout.item_popup)
             }
-            spinner?.setSelection(viewModel.selectedYearMonth)
+            binding.spinnerDate.setSelection(viewModel.selectedYearMonth)
         })
         viewModel.itemsLiveData.observe(viewLifecycleOwner, {
             homeAdapter.submitList(it.list)
@@ -127,32 +142,13 @@ class HomeFragment : Fragment() {
         })
     }
 
-    interface YearMonthListCallback {
-        fun getSpinnerView(): AppCompatSpinner
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.fragment_home, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_add_ap -> {
-                setupAxisTransition()
-                findNavController().navigate(R.id.action_add_ap)
-                true
-            }
-            R.id.menu_add_pulse -> {
-                setupAxisTransition()
-                findNavController().navigate(R.id.action_add_pulse)
-                true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
     private fun setupAxisTransition() {
+        /*exitTransition = Hold().apply {
+            duration = resources.getInteger(R.integer.axis_duration).toLong()
+        }
+        reenterTransition = Hold().apply {
+            duration = resources.getInteger(R.integer.axis_duration).toLong()
+        }*/
         exitTransition = MaterialSharedAxis(Z, true).apply {
             duration = resources.getInteger(R.integer.axis_duration).toLong()
         }

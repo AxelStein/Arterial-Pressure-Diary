@@ -1,159 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorListItem"
-    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+    android:background="?attr/colorListItem">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:paddingBottom="8dp">
+        android:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay">
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:drawablePadding="16dp"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorListItem"
+            app:navigationIcon="@drawable/icon_back"
+            app:menu="@menu/fragment_edit_log"
+            app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:focusable="true"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/icon_date"
-            app:drawableTint="?android:attr/textColorSecondary"
-            app:layout_constraintEnd_toStartOf="@+id/time"
-            app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Thu, December 10" />
+            android:focusableInTouchMode="true"
+            android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:drawablePadding="16dp"
-            android:focusable="true"
-            android:gravity="center_vertical|end"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/icon_time"
-            app:drawableTint="?android:attr/textColorSecondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/date"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="12:30" />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/icon_date"
+                app:drawableTint="?android:attr/textColorSecondary"
+                app:layout_constraintEnd_toStartOf="@+id/time"
+                app:layout_constraintHorizontal_weight="3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Thu, December 10" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_systolic"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="12dp"
-            app:layout_constraintEnd_toStartOf="@+id/input_layout_diastolic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date">
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:gravity="center_vertical|end"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/icon_time"
+                app:drawableTint="?android:attr/textColorSecondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/date"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="12:30" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/systolic"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_systolic"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_systolic"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:maxLength="3"
-                tools:text="110" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toStartOf="@+id/input_layout_diastolic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/systolic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_systolic"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    tools:text="110" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_diastolic"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/input_layout_systolic"
-            app:layout_constraintTop_toTopOf="@+id/input_layout_systolic">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/diastolic"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_diastolic"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_diastolic"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:maxLength="3"
-                tools:text="70" />
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/input_layout_systolic"
+                app:layout_constraintTop_toTopOf="@+id/input_layout_systolic">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/diastolic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_diastolic"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    tools:text="70" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="input_layout_systolic, input_layout_diastolic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_comment"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="140"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/barrier">
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="input_layout_systolic, input_layout_diastolic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/comment"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_comment"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_comment"
-                android:imeOptions="actionDone"
-                android:inputType="textCapSentences|textMultiLine"
-                android:maxLength="140"
-                tools:text="Somebody has leaved a comment here" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="140"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_comment"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLength="140"
+                    tools:text="Somebody has leaved a comment here" />
 
-        <TextView
-            android:id="@+id/error_loading"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_centerInParent="true"
-            android:background="?android:attr/windowBackground"
-            android:gravity="center"
-            android:text="@string/error_opening"
-            android:textColor="?attr/colorError"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/error_loading"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:background="?android:attr/windowBackground"
+                android:gravity="center"
+                android:text="@string/error_opening"
+                android:textColor="?attr/colorError"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

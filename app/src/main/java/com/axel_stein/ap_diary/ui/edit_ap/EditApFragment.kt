@@ -1,8 +1,9 @@
 package com.axel_stein.ap_diary.ui.edit_ap
 
-import android.graphics.Color
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
@@ -26,7 +27,6 @@ class EditApFragment : Fragment(), OnConfirmListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         id = arguments?.getLong("id") ?: 0L
 
         if (id == 0L) {
@@ -38,7 +38,7 @@ class EditApFragment : Fragment(), OnConfirmListener {
             }
         } else {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
-                scrimColor = Color.TRANSPARENT
+                // scrimColor = Color.TRANSPARENT
                 duration = resources.getInteger(R.integer.transform_duration).toLong()
             }
         }
@@ -51,6 +51,29 @@ class EditApFragment : Fragment(), OnConfirmListener {
     ): View {
         binding = FragmentEditApBinding.inflate(inflater)
         ViewCompat.setTransitionName(binding.container, "shared_element_container")
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menu_save -> {
+                    viewModel.save()
+                    true
+                }
+                R.id.menu_delete -> {
+                    ConfirmDialog.Builder().from(this)
+                        .title(R.string.dialog_title_confirm)
+                        .message(R.string.dialog_msg_delete_log)
+                        .positiveBtnText(R.string.action_delete)
+                        .negativeBtnText(R.string.action_cancel)
+                        .show()
+                    true
+                }
+                else -> false
+            }
+        }
+        binding.toolbar.menu.findItem(R.id.menu_delete)?.isVisible = id != 0L
 
         binding.date.setOnClickListener {
             showDatePicker(requireContext(), viewModel.getCurrentDateTime()) { year, month, dayOfMonth ->
@@ -102,38 +125,14 @@ class EditApFragment : Fragment(), OnConfirmListener {
         viewModel.showMessageLiveData.observe(viewLifecycleOwner, {
             val msg = it.getContent()
             if (msg != null) {
-                Snackbar.make(view, msg, LENGTH_SHORT).show()
+                activity?.findViewById<View>(android.R.id.content)?.let { content ->
+                    Snackbar.make(content, msg, LENGTH_SHORT).show()
+                }
             }
         })
         viewModel.actionFinishLiveData.observe(viewLifecycleOwner, {
             findNavController().navigateUp()
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
-        inflater.inflate(R.menu.fragment_edit_log, menu)
-        menu.findItem(R.id.menu_delete)?.isVisible = id != 0L
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_save -> {
-                viewModel.save()
-                true
-            }
-            R.id.menu_delete -> {
-                ConfirmDialog.Builder().from(this)
-                    .title(R.string.dialog_title_confirm)
-                    .message(R.string.dialog_msg_delete_log)
-                    .positiveBtnText(R.string.action_delete)
-                    .negativeBtnText(R.string.action_cancel)
-                    .show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onConfirm(tag: String?) {
