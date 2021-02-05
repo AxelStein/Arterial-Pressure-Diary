@@ -8,8 +8,11 @@ import com.axel_stein.ap_diary.data.google_drive.GoogleDriveService
 import com.axel_stein.ap_diary.data.room.AppDatabase
 import com.axel_stein.ap_diary.data.room.dao.LogDao
 import com.axel_stein.ap_diary.data.room.repository.LogRepository
+import com.google.gson.*
 import dagger.Module
 import dagger.Provides
+import org.joda.time.DateTime
+import java.lang.reflect.Type
 import javax.inject.Singleton
 
 @Module
@@ -45,5 +48,25 @@ class AppModule(private val context: Context) {
     fun provideDriveService() = GoogleDriveService(context)
 
     @Provides
+    @Singleton
     fun provideSettings() = AppSettings(context)
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .registerTypeAdapter(
+                DateTime::class.java,
+                JsonSerializer {
+                        src: DateTime, _: Type?, _: JsonSerializationContext? -> JsonPrimitive(src.toString())
+                } as JsonSerializer<DateTime>
+            )
+            .registerTypeAdapter(
+                DateTime::class.java,
+                JsonDeserializer {
+                        json: JsonElement, _: Type?, _: JsonDeserializationContext? -> DateTime(json.asString)
+                } as JsonDeserializer<DateTime>
+            )
+            .create()
+    }
 }
