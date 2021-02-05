@@ -145,6 +145,8 @@ class HomeFragment : Fragment() {
                 true
             }
             R.id.menu_add_pulse -> {
+                exitTransition = MaterialSharedAxis(Z, /* forward= */ true)
+                reenterTransition = MaterialSharedAxis(Z, /* forward= */ false)
                 findNavController().navigate(R.id.action_add_pulse)
                 true
             }

@@ -22,6 +22,16 @@ class EditPulseFragment : Fragment(), OnConfirmListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         id = arguments?.getLong("id") ?: 0L
+
+        if (id == 0L) {
+            enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, /* forward= */ true)
+            returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, /* forward= */ false)
+        } else {
+            sharedElementEnterTransition = MaterialContainerTransform().apply {
+                scrimColor = Color.TRANSPARENT
+                duration = resources.getInteger(R.integer.transition_animation_duration).toLong()
+            }
+        }
     }
 
     override fun onCreateView(
@@ -30,6 +40,8 @@ class EditPulseFragment : Fragment(), OnConfirmListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditPulseBinding.inflate(inflater)
+        ViewCompat.setTransitionName(binding.container, "shared_element_container")
+
         binding.date.setOnClickListener {
             showDatePicker(requireContext(), viewModel.getCurrentDateTime()) { year, month, dayOfMonth ->
                 viewModel.setDate(year, month, dayOfMonth)
