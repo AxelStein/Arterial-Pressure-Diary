@@ -105,30 +105,12 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--<com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_pulse"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_layout_systolic"
-            app:suffixText="@string/suffix_pulse">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/pulse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_pulse"
-                android:imeOptions="actionDone"
-                android:inputType="number"
-                android:maxLength="3"
-                tools:text="84" />
-
-        </com.google.android.material.textfield.TextInputLayout>-->
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="input_layout_systolic, input_layout_diastolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_comment"
@@ -142,7 +124,7 @@
             app:counterMaxLength="140"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_layout_systolic">
+            app:layout_constraintTop_toBottomOf="@+id/barrier">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/comment"
