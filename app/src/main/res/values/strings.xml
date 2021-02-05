@@ -8,6 +8,8 @@
     <string name="action_delete">Delete</string>
     <string name="action_save">Save</string>
     <string name="action_settings">Settings</string>
+    <string name="action_sign_in_google">Sign in with Google</string>
+    <string name="action_skip">Skip</string>
     <string name="app_name">Blood Pressure Diary</string>
     <string name="dialog_msg_delete_log">Log will be deleted permanently.</string>
     <string name="dialog_title_confirm">Confirm action</string>
@@ -34,6 +36,7 @@
     <string name="month_sep">September</string>
     <string name="msg_log_deleted">Log deleted</string>
     <string name="msg_log_saved">Log saved</string>
+    <string name="msg_sign_google_success">Signed in successfully</string>
     <string name="no_data">No data</string>
     <string name="suffix_ap">mmHg</string>
     <string name="suffix_pulse">bpm</string>
