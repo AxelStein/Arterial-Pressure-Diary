@@ -57,4 +57,5 @@
     <string name="main_pref_google_create_backup">Create backup</string>
     <string name="main_pref_google_import_backup">Import backup</string>
     <string name="main_pref_google_last_sync">Last sync</string>
+    <string name="main_pref_category_reminders">Reminders</string>
 </resources>

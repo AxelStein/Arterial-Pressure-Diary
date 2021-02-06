@@ -57,6 +57,14 @@
 
     </PreferenceCategory>
 
+    <!--<PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/main_pref_category_reminders">
+
+        todo
+
+    </PreferenceCategory>-->
+
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/main_pref_category_backup">

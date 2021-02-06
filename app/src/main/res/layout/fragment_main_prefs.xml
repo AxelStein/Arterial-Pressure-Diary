@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorListItem">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorListItem"
+            app:navigationIcon="@drawable/icon_back"
+            app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay"
+            app:title="@string/action_settings"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <!--<TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_theme"/>-->
+
+            <LinearLayout
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp"
+                    android:text="@string/main_pref_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:text="@string/theme_system"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!---->
+            <TextView
+                style="@style/PreferenceItem.Category"
+                android:text="@string/main_pref_category_google"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_google_sign_in"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_google_create_backup"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_google_import_backup"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_google_last_sync"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_google_sign_out"/>
+
+            <!---->
+            <TextView
+                style="@style/PreferenceItem.Category"
+                android:text="@string/main_pref_category_backup"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_export_backup"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_import_backup"/>
+
+            <!---->
+            <TextView
+                style="@style/PreferenceItem.Category"
+                android:text="@string/main_pref_category_about_app"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_rate_app"/>
+
+            <TextView
+                style="@style/PreferenceItem"
+                android:text="@string/main_pref_app_version_title"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

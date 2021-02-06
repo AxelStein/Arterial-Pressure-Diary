@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater)
         // binding.toolbar.inflateMenu(R.menu.fragment_home)
         binding.toolbar.setOnMenuItemClickListener { item ->
+            setupAxisTransition()
             when (item.itemId) {
                 R.id.action_settings -> {
                     findNavController().navigate(R.id.main_preferences_fragment)
@@ -51,13 +52,11 @@ class HomeFragment : Fragment() {
                 }
 
                 R.id.menu_add_ap -> {
-                    setupAxisTransition()
                     findNavController().navigate(R.id.action_add_ap)
                     true
                 }
 
                 R.id.menu_add_pulse -> {
-                    setupAxisTransition()
                     findNavController().navigate(R.id.action_add_pulse)
                     true
                 }
