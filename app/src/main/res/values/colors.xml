@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <color name="color_bg_remove_day">#F44336</color>
-    <color name="color_bg_remove_night">#F44336</color>
     <color name="color_list_bg_day">#eee</color>
     <color name="color_list_bg_night">#303030</color>
     <color name="color_list_item_day">#fff</color>
     <color name="color_list_item_night">#404040</color>
-    <color name="color_primary_dark_day">#00227b</color>
-    <color name="color_primary_day">#3949ab</color>
-    <color name="color_primary_night">#8C9EFF</color>
-    <color name="toolbar_bg_color_day">@color/color_primary_day</color>
-    <color name="toolbar_bg_color_night">#202020</color>
-    <color name="color_splash">#3F51B5</color>
+    <color name="toolbar_bg_color_day">#fff</color>
+    <color name="toolbar_bg_color_night">#202020</color> <!--303030-->
+    <color name="color_primary_dark_day">#757575</color>
+    <color name="color_primary_day">#00796B</color>
+    <color name="color_primary_night">#A7FFEB</color>
 </resources>

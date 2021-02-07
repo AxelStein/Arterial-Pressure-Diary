@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorListItem"
+            android:background="?attr/toolbarBackgroundColor"
             app:navigationIcon="@drawable/icon_back"
             app:menu="@menu/fragment_edit_log" />
 
