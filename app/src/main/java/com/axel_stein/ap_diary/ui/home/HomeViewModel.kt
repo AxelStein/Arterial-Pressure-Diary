@@ -12,6 +12,7 @@ import com.axel_stein.ap_diary.ui.App
 import com.axel_stein.ap_diary.ui.utils.Event
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers.io
+import org.joda.time.LocalDate
 import javax.inject.Inject
 
 @SuppressLint("CheckResult")
@@ -69,7 +70,11 @@ class HomeViewModel : ViewModel() {
                 it.map { ym ->
                     val (year, month) = ym.split("-")
                     val monthFormatted = resources.months[month.toInt() - 1]
-                    "$monthFormatted $year"
+                    if (year.toInt() != LocalDate().year) {
+                        "$monthFormatted $year"
+                    } else {
+                        monthFormatted
+                    }
                 }.run {
                     _yearMonthListData.postValue(this)
                 }
