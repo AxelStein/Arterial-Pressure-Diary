@@ -1,7 +1,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout="@layout/fragment_main_prefs">
 
     <ListPreference
         android:entries="@array/theme_entries"
@@ -13,8 +14,23 @@
         app:title="@string/main_pref_theme"/>
 
     <PreferenceCategory
-        app:allowDividerAbove="false"
-        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false"
+        app:title="@string/main_pref_category_reminders">
+
+        <SwitchPreference
+            app:key="reminder_morning"
+            app:title="@string/main_pref_reminder_morning"
+            app:iconSpaceReserved="false"/>
+
+        <SwitchPreference
+            app:key="reminder_evening"
+            app:title="@string/main_pref_reminder_evening"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:isPreferenceVisible="false"
         app:iconSpaceReserved="false"
         app:title="@string/main_pref_category_google">
 
@@ -57,14 +73,6 @@
 
     </PreferenceCategory>
 
-    <!--<PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="@string/main_pref_category_reminders">
-
-        todo
-
-    </PreferenceCategory>-->
-
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/main_pref_category_backup">
@@ -75,14 +83,13 @@
             app:title="@string/main_pref_export_backup" />
 
         <Preference
-            app:allowDividerBelow="false"
             app:iconSpaceReserved="false"
             app:key="import_backup"
             app:title="@string/main_pref_import_backup"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--<PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="@string/main_pref_category_about_app">
 
@@ -103,6 +110,6 @@
             app:summary="@string/app_version"
             app:title="@string/main_pref_app_version_title"/>
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
 </PreferenceScreen>

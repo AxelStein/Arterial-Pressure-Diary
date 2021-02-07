@@ -8,6 +8,7 @@
         <item name="colorListBackground">@color/color_list_bg_day</item>
         <item name="colorListItem">@color/color_list_item_day</item>
         <item name="toolbarBackgroundColor">@color/toolbar_bg_color_day</item>
+        <item name="preferenceTheme">@style/Theme.ArterialPressureDiary.PreferenceThemeOverlay</item>
     </style>
     <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">#000</item>
@@ -20,56 +21,8 @@
     <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
         <item name="android:dropDownVerticalOffset">4dp</item>
     </style>
-    <style name="PreferenceItem">
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:background">?attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">48dp</item>
-    </style>
-    <style name="PreferenceItem.Category">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
-        <item name="android:textColor">?attr/colorAccent</item>
-        <item name="android:background">@null</item>
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-        <item name="android:layout_marginTop">8dp</item>
-    </style>
-    <style name="PreferenceTwoLine">
-        <item name="android:background">?attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">48dp</item>
-        <item name="android:orientation">vertical</item>
-    </style>
 
-    <style name="PreferenceTwoLineTitle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_gravity">center_vertical</item>
-    </style>
-
-    <style name="PreferenceTwoLineSummary">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">3</item>
-        <item name="android:tag">summary</item>
+    <style name="Theme.ArterialPressureDiary.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+        <item name="android:layout">@layout/fragment_main_prefs</item>
     </style>
 </resources>

@@ -2,7 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,113 +23,10 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
+        android:id="@android:id/list_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
-
-            <com.axel_stein.ap_diary.ui.preferences.TwoLinePreference
-                android:id="@+id/theme"
-                style="@style/PreferenceTwoLine">
-                <TextView
-                    style="@style/PreferenceTwoLineTitle"
-                    android:text="@string/main_pref_theme" />
-                <TextView
-                    style="@style/PreferenceTwoLineSummary"
-                    />
-            </com.axel_stein.ap_diary.ui.preferences.TwoLinePreference>
-
-            <!---->
-            <TextView
-                style="@style/PreferenceItem.Category"
-                android:text="@string/main_pref_category_google"/>
-
-            <TextView
-                android:id="@+id/google_sign_in"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_google_sign_in"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/google_create_backup"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_google_create_backup"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/google_import_backup"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_google_import_backup"
-                android:visibility="gone"/>
-
-            <com.axel_stein.ap_diary.ui.preferences.TwoLinePreference
-                android:id="@+id/google_last_sync"
-                style="@style/PreferenceTwoLine">
-                <TextView
-                    style="@style/PreferenceTwoLineTitle"
-                    android:text="@string/main_pref_google_last_sync" />
-                <TextView
-                    style="@style/PreferenceTwoLineSummary"
-                    tools:text="14 may at 13:45"/>
-            </com.axel_stein.ap_diary.ui.preferences.TwoLinePreference>
-
-            <TextView
-                android:id="@+id/google_sign_out"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_google_sign_out"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <!---->
-            <TextView
-                style="@style/PreferenceItem.Category"
-                android:text="@string/main_pref_category_backup"/>
-
-            <TextView
-                android:id="@+id/export_backup"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_export_backup"/>
-
-            <TextView
-                android:id="@+id/import_backup"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_import_backup"/>
-
-            <!---->
-            <TextView
-                style="@style/PreferenceItem.Category"
-                android:text="@string/main_pref_category_about_app"/>
-
-            <TextView
-                android:id="@+id/rate_app"
-                style="@style/PreferenceItem"
-                android:text="@string/main_pref_rate_app"/>
-
-            <com.axel_stein.ap_diary.ui.preferences.TwoLinePreference
-                style="@style/PreferenceTwoLine"
-                android:clickable="false"
-                android:focusable="false">
-                <TextView
-                    style="@style/PreferenceTwoLineTitle"
-                    android:text="@string/main_pref_app_version_title" />
-                <TextView
-                    style="@style/PreferenceTwoLineSummary"
-                    android:text="@string/app_version" />
-            </com.axel_stein.ap_diary.ui.preferences.TwoLinePreference>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

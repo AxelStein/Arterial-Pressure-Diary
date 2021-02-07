@@ -7,6 +7,7 @@
         <item name="colorListBackground">@color/color_list_bg_night</item>
         <item name="colorListItem">@color/color_list_item_night</item>
         <item name="toolbarBackgroundColor">@color/toolbar_bg_color_night</item>
+        <item name="preferenceTheme">@style/Theme.ArterialPressureDiary.PreferenceThemeOverlay</item>
     </style>
     <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.ArterialPressureDiary.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"/>

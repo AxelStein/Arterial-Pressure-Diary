@@ -1,5 +1,177 @@
 package com.axel_stein.ap_diary.ui.preferences
 
-class MainPreferencesViewModel {
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.content.Intent.*
+import android.net.Uri
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.axel_stein.ap_diary.R
+import com.axel_stein.ap_diary.data.backup.BACKUP_FILE_NAME
+import com.axel_stein.ap_diary.data.backup.BackupHelper
+import com.axel_stein.ap_diary.data.google_drive.GoogleDriveService
+import com.axel_stein.ap_diary.ui.App
+import com.axel_stein.ap_diary.ui.utils.Event
+import com.axel_stein.ap_diary.ui.utils.readStrFromFileUri
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import java.io.File
 
+class MainPreferencesViewModel(app: App) : AndroidViewModel(app) {
+    companion object {
+        const val CODE_PICK_FILE = 1
+        private const val CODE_REQUEST_PERMISSIONS = 2
+    }
+
+    private val showProgressBar = MutableLiveData(false)
+    val showProgressBarLiveData: LiveData<Boolean> = showProgressBar
+
+    private val showAutoSync = MutableLiveData(false)
+    val showAutoSyncLiveData: LiveData<Boolean> = showAutoSync
+
+    private val lastSyncTime = MutableLiveData(0L)
+    val lastSyncTimeLiveData: LiveData<Long> = lastSyncTime
+
+    private val message = MutableLiveData<Event<Int>>()
+    val messageLiveData: LiveData<Event<Int>> = message
+
+    private val driveService = GoogleDriveService(app)
+    private val backupHelper = BackupHelper()
+    private var lastAction = ""
+
+    init {
+        if (driveService.hasPermissions()) {
+            showAutoSync.value = true
+        }
+        updateLastSyncTime()
+    }
+
+    fun startExportToFile() = backupHelper.createBackup()
+        .map { file ->
+            Intent(ACTION_SEND).apply {
+                type = "*/*"
+                putExtra(EXTRA_STREAM, getUriForFile(file))
+                flags = FLAG_GRANT_WRITE_URI_PERMISSION or FLAG_GRANT_READ_URI_PERMISSION
+            }
+        }
+        .observeOn(mainThread())
+        .doOnSubscribe { showProgressBar(true) }
+        .doFinally { showProgressBar(false) }
+
+    private fun getUriForFile(file: File) = FileProvider.getUriForFile(
+        getApplication(),
+        "com.axel_stein.ap_diary.fileprovider",
+        file
+    )
+
+    fun startImportFromFile() =
+        Intent(ACTION_GET_CONTENT).apply {
+            addCategory(CATEGORY_OPENABLE)
+            type = "*/*"
+            flags = FLAG_GRANT_WRITE_URI_PERMISSION or FLAG_GRANT_READ_URI_PERMISSION
+        }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode != Activity.RESULT_OK) return
+
+        when (requestCode) {
+            CODE_PICK_FILE -> {
+                importFromFile(data?.data)
+                    .subscribe({
+                        message.value = Event(R.string.dialog_msg_import_completed)
+                    }, {
+                        it.printStackTrace()
+                        message.value = Event(R.string.error_import_backup)
+                    })
+            }
+
+            CODE_REQUEST_PERMISSIONS -> {
+                showAutoSync.value = true
+                updateLastSyncTime()
+
+                when (lastAction) {
+                    "create" -> driveCreateBackup()
+                    "import" -> driveImportBackup()
+                }
+            }
+        }
+    }
+
+    private fun importFromFile(uri: Uri?) = readStrFromFileUri(getApplication<App>().contentResolver, uri)
+        .flatMapCompletable { backup -> backupHelper.importBackup(backup) }
+        .observeOn(mainThread())
+        .doOnSubscribe { showProgressBar(true) }
+        .doFinally { showProgressBar(false) }
+
+    @SuppressLint("CheckResult")
+    fun driveCreateBackup(fragment: Fragment) {
+        if (!driveService.hasPermissions()) {
+            lastAction = "create"
+            driveService.requestPermissions(fragment, CODE_REQUEST_PERMISSIONS)
+        } else {
+            driveCreateBackup()
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun driveCreateBackup() {
+        backupHelper.createBackup()
+            .flatMapCompletable { file -> driveService.uploadFile(BACKUP_FILE_NAME, file) }
+            .observeOn(mainThread())
+            .doOnSubscribe { showProgressBar(true) }
+            .doOnComplete { updateLastSyncTime() }
+            .doFinally { showProgressBar(false) }
+            .subscribe({
+                message.value = Event(R.string.dialog_msg_backup_created)
+            }, {
+                it.printStackTrace()
+                message.value = Event(R.string.error_create_backup)
+            })
+    }
+
+    fun driveImportBackup(fragment: Fragment) {
+        if (!driveService.hasPermissions()) {
+            lastAction = "import"
+            driveService.requestPermissions(fragment, CODE_REQUEST_PERMISSIONS)
+        } else {
+            driveImportBackup()
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun driveImportBackup() {
+        driveService.downloadFile(BACKUP_FILE_NAME)
+            .flatMapCompletable { data -> backupHelper.importBackup(data) }
+            .observeOn(mainThread())
+            .doOnSubscribe { showProgressBar(true) }
+            .doFinally { showProgressBar(false) }
+            .subscribe({
+                message.value = Event(R.string.dialog_msg_import_completed)
+            }, {
+                it.printStackTrace()
+                message.value = Event(R.string.error_import_backup)
+            })
+    }
+
+    @SuppressLint("CheckResult")
+    private fun updateLastSyncTime() {
+        if (driveService.hasPermissions()) {
+            driveService.getLastSyncTime(BACKUP_FILE_NAME)
+                .observeOn(mainThread())
+                .doOnSubscribe { showProgressBar(true) }
+                .doFinally { showProgressBar(false) }
+                .subscribe({
+                    lastSyncTime.postValue(it)
+                }, {
+                    it.printStackTrace()
+                })
+        }
+    }
+
+    private fun showProgressBar(show: Boolean) {
+        showProgressBar.value = show
+    }
 }
