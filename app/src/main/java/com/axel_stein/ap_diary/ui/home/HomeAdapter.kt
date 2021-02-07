@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.axel_stein.ap_diary.databinding.ItemLogBinding
 import com.axel_stein.ap_diary.ui.home.log_items.ApLogItem
+import com.axel_stein.ap_diary.ui.home.log_items.ItemType
 import com.axel_stein.ap_diary.ui.home.log_items.LogItem
 import com.axel_stein.ap_diary.ui.home.log_items.PulseLogItem
 import com.axel_stein.ap_diary.ui.utils.setVisible
@@ -34,6 +35,15 @@ class HomeAdapter : ListAdapter<LogItem, HomeAdapter.ViewHolder>(Companion) {
     class ViewHolder(private val binding: ItemLogBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun setItem(item: LogItem) {
+            when (item.type()) {
+                ItemType.AP -> {
+                    itemView.transitionName = "shared_element_ap_${item.id()}"
+                }
+
+                ItemType.PULSE -> {
+                    itemView.transitionName = "shared_element_pulse_${item.id()}"
+                }
+            }
             binding.title.text = item.title()
             // binding.title.setTextColor(if (item.error()) 0 else 1)
             binding.suffix.text = item.suffix()

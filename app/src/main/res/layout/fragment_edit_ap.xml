@@ -19,8 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorListItem"
             app:navigationIcon="@drawable/icon_back"
-            app:menu="@menu/fragment_edit_log"
-            app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay"/>
+            app:menu="@menu/fragment_edit_log" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

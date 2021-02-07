@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -37,7 +37,7 @@ class EditPulseFragment : Fragment(), OnConfirmListener {
             }
         } else {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
-                // scrimColor = Color.TRANSPARENT
+                drawingViewId = R.id.nav_host_fragment
                 duration = resources.getInteger(R.integer.transform_duration).toLong()
             }
         }
@@ -49,7 +49,7 @@ class EditPulseFragment : Fragment(), OnConfirmListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditPulseBinding.inflate(inflater)
-        ViewCompat.setTransitionName(binding.container, "shared_element_container")
+        binding.container.transitionName = "shared_element_pulse_$id"
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
@@ -97,6 +97,10 @@ class EditPulseFragment : Fragment(), OnConfirmListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         viewModel.pulseLiveData.observe(viewLifecycleOwner, {
             binding.date.text = formatDate(requireContext(), it.dateTime)
             binding.time.text = formatTime(requireContext(), it.dateTime)

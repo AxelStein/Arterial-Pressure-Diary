@@ -13,7 +13,5 @@
     </item>
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/icon_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="always" />
+        android:title="@string/action_settings" />
 </menu>

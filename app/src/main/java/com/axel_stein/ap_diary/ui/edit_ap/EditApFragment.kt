@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,7 +37,7 @@ class EditApFragment : Fragment(), OnConfirmListener {
             }
         } else {
             sharedElementEnterTransition = MaterialContainerTransform().apply {
-                // scrimColor = Color.TRANSPARENT
+                drawingViewId = R.id.nav_host_fragment
                 duration = resources.getInteger(R.integer.transform_duration).toLong()
             }
         }
@@ -50,7 +49,7 @@ class EditApFragment : Fragment(), OnConfirmListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEditApBinding.inflate(inflater)
-        ViewCompat.setTransitionName(binding.container, "shared_element_container")
+        binding.container.transitionName = "shared_element_ap_$id"
 
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()

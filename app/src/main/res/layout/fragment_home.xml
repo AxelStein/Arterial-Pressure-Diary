@@ -27,7 +27,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:dropDownVerticalOffset="@dimen/dropdown_offset"
                 app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay"
-                app:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay" />
+                android:theme="@style/Theme.ArterialPressureDiary.AppBarOverlay" />
 
         </androidx.appcompat.widget.Toolbar>
 
