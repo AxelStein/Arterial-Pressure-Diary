@@ -20,19 +20,17 @@
         android:id="@+id/splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_splash"
+        android:background="?attr/colorListItem"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        tools:visibility="gone">
+        android:visibility="gone">
 
         <Button
             android:id="@+id/sign_in_google"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#fff"
             android:text="@string/action_sign_in_google"
-            android:textColor="#000"
             app:layout_constraintBottom_toTopOf="@+id/skip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +43,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/action_skip"
-            android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
