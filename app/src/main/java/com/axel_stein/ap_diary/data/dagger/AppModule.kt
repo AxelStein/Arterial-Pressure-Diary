@@ -17,6 +17,8 @@ import javax.inject.Singleton
 
 @Module
 class AppModule(private val context: Context) {
+    private val appSettings = AppSettings(context)
+
     @Provides
     @Singleton
     fun provideDatabase(): AppDatabase {
@@ -49,7 +51,7 @@ class AppModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideSettings() = AppSettings(context)
+    fun provideSettings() = appSettings
 
     @Provides
     @Singleton

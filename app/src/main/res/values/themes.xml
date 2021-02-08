@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:dropDownVerticalOffset">4dp</item>
+    </style>
     <style name="Theme.ArterialPressureDiary" parent="Theme.MaterialComponents.DayNight.Bridge">
         <item name="colorPrimary">@color/color_primary_day</item>
         <item name="colorPrimaryDark">#757575</item>
@@ -18,10 +21,6 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.ArterialPressureDiary.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-    <style name="PopupMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
-        <item name="android:dropDownVerticalOffset">4dp</item>
-    </style>
-
     <style name="Theme.ArterialPressureDiary.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
         <item name="android:layout">@layout/fragment_main_prefs</item>
     </style>
