@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/toolbarBackgroundColor"
-            app:navigationIcon="@drawable/icon_back"
-            app:menu="@menu/fragment_edit_log" />
+            app:menu="@menu/fragment_edit_log"
+            app:navigationIcon="@drawable/icon_back" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -126,10 +126,10 @@
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="input_layout_systolic, input_layout_diastolic"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="input_layout_systolic, input_layout_diastolic"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_comment"
@@ -156,6 +156,21 @@
                     tools:text="Somebody has leaved a comment here" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="start"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_layout_comment"
+                tools:text="@string/category_crisis"
+                tools:textColor="?attr/colorCategoryCrisis"/>
 
             <TextView
                 android:id="@+id/error_loading"

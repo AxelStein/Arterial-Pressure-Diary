@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <color name="color_category_crisis_day">#B71C1C</color>
+    <color name="color_category_crisis_night">#FF1744</color>
+    <color name="color_category_elevated_day">#FBC02D</color>
+    <color name="color_category_elevated_night">#FFFF00</color>
+    <color name="color_category_normal_day">#4CAF50</color>
+    <color name="color_category_normal_night">#69F0AE</color>
+    <color name="color_category_stage_1_day">#F57C00</color>
+    <color name="color_category_stage_1_night">#FFAB40</color>
+    <color name="color_category_stage_2_day">#D32F2F</color>
+    <color name="color_category_stage_2_night">#FF5252</color>
     <color name="color_list_bg_day">#eee</color>
     <color name="color_list_bg_night">#303030</color>
     <color name="color_list_item_day">#fff</color>
     <color name="color_list_item_night">#404040</color>
-    <color name="toolbar_bg_color_day">#fff</color>
-    <color name="toolbar_bg_color_night">#202020</color> <!--303030-->
+    <!--303030-->
     <color name="color_primary_dark_day">#757575</color>
     <color name="color_primary_day">#00796B</color>
     <color name="color_primary_night">#A7FFEB</color>
+    <color name="toolbar_bg_color_day">#fff</color>
+    <color name="toolbar_bg_color_night">#202020</color>
 </resources>

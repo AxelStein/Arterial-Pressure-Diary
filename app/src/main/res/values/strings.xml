@@ -13,6 +13,11 @@
     <string name="action_skip">Skip</string>
     <string name="app_name">Blood Pressure Diary</string>
     <string name="app_version" translatable="false">1.0.1</string>
+    <string name="category_crisis">Hypertensive crisis. Consult your doctor immediately!</string>
+    <string name="category_elevated">Elevated</string>
+    <string name="category_normal">Normal</string>
+    <string name="category_stage_1">High blood pressure, stage 1</string>
+    <string name="category_stage_2">High blood pressure, stage 2</string>
     <string name="dialog_msg_backup_created">Backup created</string>
     <string name="dialog_msg_delete_log">Log will be deleted permanently.</string>
     <string name="dialog_msg_import_completed">Import completed</string>

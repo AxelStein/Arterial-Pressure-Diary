@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import org.joda.time.DateTime
+import org.joda.time.LocalTime
 
 fun showDatePicker(
     context: Context,
@@ -26,5 +27,17 @@ fun showTimePicker(
         context,
         { _, hourOfDay, minuteOfHour -> callback(hourOfDay, minuteOfHour) },
         dateTime.hourOfDay, dateTime.minuteOfHour, is24HourFormat(context)
+    ).show()
+}
+
+fun showTimePicker(
+    context: Context,
+    time: LocalTime,
+    callback: (hourOfDay: Int, minuteOfHour: Int) -> Unit
+) {
+    TimePickerDialog(
+        context,
+        { _, hourOfDay, minuteOfHour -> callback(hourOfDay, minuteOfHour) },
+        time.hourOfDay, time.minuteOfHour, is24HourFormat(context)
     ).show()
 }

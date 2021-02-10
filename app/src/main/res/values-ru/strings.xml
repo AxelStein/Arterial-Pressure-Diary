@@ -64,4 +64,9 @@
     <string name="theme_dark">Темная</string>
     <string name="theme_light">Светлая</string>
     <string name="theme_system">Настройки системы</string>
+    <string name="category_normal">Норма</string>
+    <string name="category_elevated">Повышено</string>
+    <string name="category_stage_1">Высокое артериальное давление, стадия 1</string>
+    <string name="category_stage_2">Высокое артериальное давление, стадия 2</string>
+    <string name="category_crisis">Гипертензивный криз. Немедленно обратитесь к врачу!</string>
 </resources>

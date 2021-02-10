@@ -23,12 +23,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
+import kotlin.math.max
 
 class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: App) :
     AndroidViewModel(app) {
 
-    private var apData = state.getLiveData<ApLog>("ap")
+    private val apData = state.getLiveData<ApLog>("ap")
     val apLiveData: LiveData<ApLog> = apData
+
+    private val categoryData = MutableLiveData<ApCategory>()
+    val categoryLiveData: LiveData<ApCategory> = categoryData
 
     private val errorSystolicEmpty = MutableLiveData<Boolean>()
     val errorSystolicEmptyLiveData: LiveData<Boolean> = errorSystolicEmpty
@@ -86,6 +90,7 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
                 errorSystolicEmpty.value = false
             }
         }
+        checkAp()
     }
 
     fun setDiastolic(s: String) {
@@ -100,6 +105,30 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
                 errorDiastolicEmpty.value = false
             }
         }
+        checkAp()
+    }
+
+    private fun checkAp() {
+        val (systolic, diastolic) = with(apData.get()) {
+            this.systolic to this.diastolic
+        }
+
+        val checkSystolic = when {
+            systolic < 120 -> 0 // normal
+            systolic in 120..129 -> 1 // elevated
+            systolic in 130..139 -> 2 // stage 1
+            systolic in 140..179 -> 3 // stage 2
+            else -> 4 // crisis
+        }
+        val checkDiastolic = when {
+            diastolic < 80 -> 0 // normal
+            diastolic in 80..89 -> 2 // stage 1
+            diastolic in 90..119 -> 3 // stage 2
+            else -> 4 // crisis
+        }
+
+        val category = max(checkSystolic, checkDiastolic)
+        categoryData.value = ApCategory.fromInt(category)
     }
 
     fun setComment(s: String) {

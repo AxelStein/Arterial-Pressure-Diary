@@ -17,11 +17,12 @@ import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog
 import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog.OnConfirmListener
 import com.axel_stein.ap_diary.ui.preferences.MainPreferencesViewModel.Companion.CODE_PICK_FILE
 import com.axel_stein.ap_diary.ui.utils.formatTime
+import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.axel_stein.ap_diary.ui.utils.showTimePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.google.android.material.transition.MaterialSharedAxis.Z
-import org.joda.time.DateTime
+import org.joda.time.LocalTime
 import javax.inject.Inject
 
 class MainPreferencesFragment : PreferenceFragmentCompat(), OnConfirmListener {
@@ -68,28 +69,10 @@ class MainPreferencesFragment : PreferenceFragmentCompat(), OnConfirmListener {
         }
 
         val reminderMorning = findPreference<SwitchPreference>("reminder_morning")
-        reminderMorning?.apply {
-            setOnPreferenceClickListener {
-                if (isChecked) {
-                    showTimePicker(requireContext(), DateTime()) { hourOfDay, minuteOfHour ->
-                        reminderMorning.summaryOn = formatTime(requireContext(), hourOfDay, minuteOfHour)
-                    }
-                }
-                true
-            }
-        }
+        setupReminder(reminderMorning, settings::setReminderMorningTime, settings::getReminderMorningTime)
 
         val reminderEvening = findPreference<SwitchPreference>("reminder_evening")
-        reminderEvening?.apply {
-            setOnPreferenceClickListener {
-                if (isChecked) {
-                    showTimePicker(requireContext(), DateTime()) { hourOfDay, minuteOfHour ->
-                        reminderEvening.summaryOn = formatTime(requireContext(), hourOfDay, minuteOfHour)
-                    }
-                }
-                true
-            }
-        }
+        setupReminder(reminderEvening, settings::setReminderEveningTime, settings::getReminderEveningTime)
 
         val exportBackup = findPreference<Preference>("export_backup")
         exportBackup?.setOnPreferenceClickListener {
@@ -113,6 +96,37 @@ class MainPreferencesFragment : PreferenceFragmentCompat(), OnConfirmListener {
                 .negativeBtnText(R.string.action_cancel)
                 .show()
             true
+        }
+
+        viewModel.showProgressBarLiveData.observe(viewLifecycleOwner) {
+            binding.progressBar.setVisible(it)
+        }
+    }
+
+    private fun setupReminder(
+        pref: SwitchPreference?,
+        setTime: (hours: Int, minutes: Int) -> Unit,
+        getTime: () -> LocalTime
+    ) {
+        pref?.apply {
+            val updateSummaryOn = {
+                if (isChecked) {
+                    val time = getTime()
+                    summaryOn = formatTime(requireContext(), time.hourOfDay, time.minuteOfHour)
+                }
+            }
+            updateSummaryOn()
+
+            setOnPreferenceClickListener {
+                updateSummaryOn()
+                if (isChecked) {
+                    showTimePicker(requireContext(), getTime()) { hourOfDay, minuteOfHour ->
+                        setTime(hourOfDay, minuteOfHour)
+                        updateSummaryOn()
+                    }
+                }
+                true
+            }
         }
     }
 

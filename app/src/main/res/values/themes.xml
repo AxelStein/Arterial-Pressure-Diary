@@ -12,6 +12,11 @@
         <item name="colorListItem">@color/color_list_item_day</item>
         <item name="toolbarBackgroundColor">@color/toolbar_bg_color_day</item>
         <item name="preferenceTheme">@style/Theme.ArterialPressureDiary.PreferenceThemeOverlay</item>
+        <item name="colorCategoryNormal">@color/color_category_normal_day</item>
+        <item name="colorCategoryElevated">@color/color_category_elevated_day</item>
+        <item name="colorCategoryStage1">@color/color_category_stage_1_day</item>
+        <item name="colorCategoryStage2">@color/color_category_stage_2_day</item>
+        <item name="colorCategoryCrisis">@color/color_category_crisis_day</item>
     </style>
     <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">#000</item>

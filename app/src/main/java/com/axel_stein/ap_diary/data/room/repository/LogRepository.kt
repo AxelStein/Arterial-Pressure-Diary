@@ -86,7 +86,7 @@ class LogRepository(private val context: Context, private val db: AppDatabase, p
 
     private fun sort(items: MutableList<LogItem>): List<LogItem> {
         items.sortByDescending { it.dateTime() }
-        items.sortWith { a, b ->
+        /*items.sortWith { a, b ->
             val d1 = a?.dateTime()?.toLocalDate()
             val d2 = b?.dateTime()?.toLocalDate()
 
@@ -98,7 +98,7 @@ class LogRepository(private val context: Context, private val db: AppDatabase, p
             } else {
                 0
             }
-        }
+        }*/
         return items
     }
 

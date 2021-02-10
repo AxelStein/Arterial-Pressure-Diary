@@ -12,7 +12,9 @@ import com.axel_stein.ap_diary.R
 import com.axel_stein.ap_diary.databinding.FragmentEditApBinding
 import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog
 import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog.OnConfirmListener
+import com.axel_stein.ap_diary.ui.edit_ap.ApCategory.*
 import com.axel_stein.ap_diary.ui.utils.*
+import com.google.android.material.color.MaterialColors.getColor
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
@@ -115,12 +117,29 @@ class EditApFragment : Fragment(), OnConfirmListener {
             }
             binding.comment.setEditorText(it.comment ?: "", false)
         })
+
+        viewModel.categoryLiveData.observe(viewLifecycleOwner) {
+            val (text, color) = when (it) {
+                NORMAL -> R.string.category_normal to getColor(view, R.attr.colorCategoryNormal)
+                ELEVATED -> R.string.category_elevated to getColor(view, R.attr.colorCategoryElevated)
+                STAGE_1 -> R.string.category_stage_1 to getColor(view, R.attr.colorCategoryStage1)
+                STAGE_2 -> R.string.category_stage_2 to getColor(view, R.attr.colorCategoryStage2)
+                CRISIS -> R.string.category_crisis to getColor(view, R.attr.colorCategoryCrisis)
+                else -> R.string.category_normal to getColor(view, R.attr.colorCategoryNormal)
+            }
+
+            binding.category.setText(text)
+            binding.category.setTextColor(color)
+        }
+
         viewModel.errorSystolicEmptyLiveData.observe(viewLifecycleOwner, {
             binding.inputLayoutSystolic.showError(it, R.string.error_field_empty)
         })
+
         viewModel.errorDiastolicEmptyLiveData.observe(viewLifecycleOwner, {
             binding.inputLayoutDiastolic.showError(it, R.string.error_field_empty)
         })
+
         viewModel.showMessageLiveData.observe(viewLifecycleOwner, {
             val msg = it.getContent()
             if (msg != null) {
@@ -129,6 +148,7 @@ class EditApFragment : Fragment(), OnConfirmListener {
                 }
             }
         })
+
         viewModel.actionFinishLiveData.observe(viewLifecycleOwner, {
             findNavController().navigateUp()
         })

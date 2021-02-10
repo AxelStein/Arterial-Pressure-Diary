@@ -7,6 +7,11 @@
         <item name="colorListItem">@color/color_list_item_night</item>
         <item name="toolbarBackgroundColor">@color/toolbar_bg_color_night</item>
         <item name="preferenceTheme">@style/Theme.ArterialPressureDiary.PreferenceThemeOverlay</item>
+        <item name="colorCategoryNormal">@color/color_category_normal_night</item>
+        <item name="colorCategoryElevated">@color/color_category_elevated_night</item>
+        <item name="colorCategoryStage1">@color/color_category_stage_1_night</item>
+        <item name="colorCategoryStage2">@color/color_category_stage_2_night</item>
+        <item name="colorCategoryCrisis">@color/color_category_crisis_night</item>
     </style>
     <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.ArterialPressureDiary.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
