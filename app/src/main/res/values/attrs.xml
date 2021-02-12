@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <attr format="color|reference" name="chartTextColor"/>
     <attr format="color|reference" name="colorCategoryCrisis"/>
     <attr format="color|reference" name="colorCategoryElevated"/>
     <attr format="color|reference" name="colorCategoryNormal"/>
@@ -7,5 +8,8 @@
     <attr format="color|reference" name="colorCategoryStage2"/>
     <attr format="color|reference" name="colorListBackground"/>
     <attr format="color|reference" name="colorListItem"/>
+    <attr format="color|reference" name="diastolicLineColor"/>
+    <attr format="color|reference" name="pulseLineColor"/>
+    <attr format="color|reference" name="systolicLineColor"/>
     <attr format="color|reference" name="toolbarBackgroundColor"/>
 </resources>

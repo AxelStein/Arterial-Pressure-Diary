@@ -10,14 +10,19 @@
     <color name="color_category_stage_1_night">#FFAB40</color>
     <color name="color_category_stage_2_day">#D32F2F</color>
     <color name="color_category_stage_2_night">#FF5252</color>
+    <color name="color_diastolic_line_day">#D500F9</color>
+    <color name="color_diastolic_line_night">#E040FB</color>
     <color name="color_list_bg_day">#eee</color>
     <color name="color_list_bg_night">#303030</color>
     <color name="color_list_item_day">#fff</color>
     <color name="color_list_item_night">#404040</color>
-    <!--303030-->
     <color name="color_primary_dark_day">#757575</color>
     <color name="color_primary_day">#00796B</color>
     <color name="color_primary_night">#A7FFEB</color>
+    <color name="color_pulse_line_day">#FF1744</color>
+    <color name="color_pulse_line_night">#FF5252</color>
+    <color name="color_systolic_line_day">#FF1744</color>
+    <color name="color_systolic_line_night">#FF5252</color>
     <color name="toolbar_bg_color_day">#fff</color>
     <color name="toolbar_bg_color_night">#202020</color>
 </resources>

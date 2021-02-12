@@ -17,6 +17,10 @@
         <item name="colorCategoryStage1">@color/color_category_stage_1_day</item>
         <item name="colorCategoryStage2">@color/color_category_stage_2_day</item>
         <item name="colorCategoryCrisis">@color/color_category_crisis_day</item>
+        <item name="pulseLineColor">@color/color_pulse_line_day</item>
+        <item name="systolicLineColor">@color/color_systolic_line_day</item>
+        <item name="diastolicLineColor">@color/color_diastolic_line_day</item>
+        <item name="chartTextColor">#000</item>
     </style>
     <style name="Theme.ArterialPressureDiary.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">#000</item>

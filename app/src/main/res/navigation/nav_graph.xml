@@ -53,4 +53,8 @@
         android:id="@+id/main_preferences_fragment"
         android:name="com.axel_stein.ap_diary.ui.preferences.MainPreferencesFragment"
         android:label="@string/action_settings" />
+    <fragment
+        android:id="@+id/charts_fragment"
+        android:name="com.axel_stein.ap_diary.ui.charts.ChartsFragment"
+        android:label="@string/action_charts" />
 </navigation>

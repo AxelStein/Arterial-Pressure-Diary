@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string-array name="chart_periods">
+        <item>@string/chart_period_month</item>
+        <item>@string/chart_period_three_months</item>
+        <item>@string/chart_period_year</item>
+    </string-array>
+    <string-array name="chart_titles">
+        <item>@string/chart_title_ap</item>
+        <item>@string/chart_title_pulse</item>
+    </string-array>
     <string-array name="months">
         <item>@string/month_jan</item>
         <item>@string/month_feb</item>
@@ -13,6 +22,20 @@
         <item>@string/month_oct</item>
         <item>@string/month_nov</item>
         <item>@string/month_dec</item>
+    </string-array>
+    <string-array name="months_a">
+        <item>@string/month_jan_a</item>
+        <item>@string/month_feb_a</item>
+        <item>@string/month_mar_a</item>
+        <item>@string/month_apr_a</item>
+        <item>@string/month_may_a</item>
+        <item>@string/month_jun_a</item>
+        <item>@string/month_jul_a</item>
+        <item>@string/month_aug_a</item>
+        <item>@string/month_sep_a</item>
+        <item>@string/month_oct_a</item>
+        <item>@string/month_nov_a</item>
+        <item>@string/month_dec_a</item>
     </string-array>
     <string-array name="theme_entries">
         <item>@string/theme_light</item>

@@ -11,6 +11,10 @@
             <item android:id="@+id/menu_add_pulse" android:title="@string/action_add_pulse"/>
         </menu>
     </item>
+
+    <item
+        android:id="@+id/action_charts"
+        android:title="@string/action_charts" />
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings" />

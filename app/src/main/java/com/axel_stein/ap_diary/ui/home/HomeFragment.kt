@@ -37,6 +37,11 @@ class HomeFragment : Fragment() {
         binding.toolbar.setOnMenuItemClickListener { item ->
             setupAxisTransition()
             when (item.itemId) {
+                R.id.action_charts -> {
+                    findNavController().navigate(R.id.charts_fragment)
+                    true
+                }
+
                 R.id.action_settings -> {
                     findNavController().navigate(R.id.main_preferences_fragment)
                     true

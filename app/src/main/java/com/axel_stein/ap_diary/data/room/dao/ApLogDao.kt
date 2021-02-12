@@ -21,6 +21,15 @@ abstract class ApLogDao : BaseDao<ApLog>() {
     @Query("SELECT * FROM ap_log")
     abstract fun getAll(): List<ApLog>
 
+    @Query("select * from ap_log where date_time > date('now', '-1 month')")
+    abstract fun getByLastMonth(): List<ApLog>
+
+    @Query("select * from ap_log where date_time > date('now', '-3 month')")
+    abstract fun getByLastThreeMonths(): List<ApLog>
+
+    @Query("select * from ap_log where date_time > date('now', '-1 year')")
+    abstract fun getByThisYear(): List<ApLog>
+
     @Transaction
     open fun importBackup(backup: List<ApLog>) {
         deleteAll()
