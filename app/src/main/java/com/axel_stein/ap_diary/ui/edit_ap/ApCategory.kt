@@ -5,7 +5,8 @@ enum class ApCategory {
     ELEVATED,
     STAGE_1,
     STAGE_2,
-    CRISIS;
+    CRISIS,
+    NONE;
 
     companion object {
         fun fromInt(value: Int) = values().first { it.ordinal == value }

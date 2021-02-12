@@ -125,11 +125,14 @@ class EditApFragment : Fragment(), OnConfirmListener {
                 STAGE_1 -> R.string.category_stage_1 to getColor(view, R.attr.colorCategoryStage1)
                 STAGE_2 -> R.string.category_stage_2 to getColor(view, R.attr.colorCategoryStage2)
                 CRISIS -> R.string.category_crisis to getColor(view, R.attr.colorCategoryCrisis)
-                else -> R.string.category_normal to getColor(view, R.attr.colorCategoryNormal)
+                else -> 0 to 0
             }
 
-            binding.category.setText(text)
-            binding.category.setTextColor(color)
+            if (text == 0 || color == 0) binding.category.text = ""
+            else {
+                binding.category.setText(text)
+                binding.category.setTextColor(color)
+            }
         }
 
         viewModel.errorSystolicEmptyLiveData.observe(viewLifecycleOwner, {
