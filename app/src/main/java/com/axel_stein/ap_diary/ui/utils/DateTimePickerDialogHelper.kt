@@ -15,7 +15,9 @@ fun showDatePicker(
         context,
         { _, year, month, dayOfMonth -> callback(year, month + 1, dayOfMonth) },
         dateTime.year, dateTime.monthOfYear-1, dateTime.dayOfMonth
-    ).show()
+    ).apply {
+        datePicker.maxDate = DateTime.now().millis
+    }.show()
 }
 
 fun showTimePicker(
