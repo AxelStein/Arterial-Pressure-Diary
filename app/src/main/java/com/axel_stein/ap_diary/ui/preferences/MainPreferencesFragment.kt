@@ -16,12 +16,14 @@ import com.axel_stein.ap_diary.ui.App
 import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog
 import com.axel_stein.ap_diary.ui.dialogs.ConfirmDialog.OnConfirmListener
 import com.axel_stein.ap_diary.ui.preferences.MainPreferencesViewModel.Companion.CODE_PICK_FILE
+import com.axel_stein.ap_diary.ui.utils.formatDateTime
 import com.axel_stein.ap_diary.ui.utils.formatTime
 import com.axel_stein.ap_diary.ui.utils.setVisible
 import com.axel_stein.ap_diary.ui.utils.showTimePicker
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 import com.google.android.material.transition.MaterialSharedAxis.Z
+import org.joda.time.DateTime
 import org.joda.time.LocalTime
 import javax.inject.Inject
 
@@ -30,6 +32,7 @@ class MainPreferencesFragment : PreferenceFragmentCompat(), OnConfirmListener {
         MainPreferencesFactory(requireContext().applicationContext as App)
     }
     private lateinit var settings: AppSettings
+    private var lastSynced: Preference? = null
 
     init {
         App.appComponent.inject(this)
@@ -74,29 +77,73 @@ class MainPreferencesFragment : PreferenceFragmentCompat(), OnConfirmListener {
         val reminderEvening = findPreference<SwitchPreference>("reminder_evening")
         setupReminder(reminderEvening, settings::setReminderEveningTime, settings::getReminderEveningTime)
 
-        val exportBackup = findPreference<Preference>("export_backup")
-        exportBackup?.setOnPreferenceClickListener {
-            viewModel.startExportToFile()
-                .subscribe({
-                    startActivity(Intent.createChooser(it, null))
-                }, {
-                    it.printStackTrace()
-                    showMessage(R.string.error_create_backup)
-                })
-            true
+        findPreference<Preference>("export_backup")?.apply {
+            setOnPreferenceClickListener {
+                viewModel.startExportToFile()
+                    .subscribe({
+                        startActivity(Intent.createChooser(it, null))
+                    }, {
+                        it.printStackTrace()
+                        showMessage(R.string.error_create_backup)
+                    })
+                true
+            }
         }
 
-        val importBackup = preferenceManager.findPreference<Preference>("import_backup")
-        importBackup?.setOnPreferenceClickListener {
-            ConfirmDialog.Builder()
-                .from(this, "import_backup")
-                .title(R.string.dialog_title_confirm)
-                .message(R.string.message_import_backup)
-                .positiveBtnText(R.string.action_import)
-                .negativeBtnText(R.string.action_cancel)
-                .show()
-            true
+        preferenceManager.findPreference<Preference>("import_backup")?.apply {
+            setOnPreferenceClickListener {
+                ConfirmDialog.Builder()
+                    .from(this@MainPreferencesFragment, "import_backup")
+                    .title(R.string.dialog_title_confirm)
+                    .message(R.string.message_import_backup)
+                    .positiveBtnText(R.string.action_import)
+                    .negativeBtnText(R.string.action_cancel)
+                    .show()
+                true
+            }
         }
+
+        preferenceManager.findPreference<Preference>("google_create_backup")?.apply {
+            setOnPreferenceClickListener {
+                ConfirmDialog.Builder()
+                    .from(this@MainPreferencesFragment, "google_create_backup")
+                    .title(R.string.dialog_title_confirm)
+                    .message(R.string.message_drive_export)
+                    .positiveBtnText(R.string.action_create)
+                    .negativeBtnText(R.string.action_cancel)
+                    .show()
+                true
+            }
+        }
+
+        preferenceManager.findPreference<Preference>("google_import_backup")?.apply {
+            setOnPreferenceClickListener {
+                ConfirmDialog.Builder()
+                    .from(this@MainPreferencesFragment, "google_import_backup")
+                    .title(R.string.dialog_title_confirm)
+                    .message(R.string.message_import_backup)
+                    .positiveBtnText(R.string.action_import)
+                    .negativeBtnText(R.string.action_cancel)
+                    .show()
+                true
+            }
+        }
+
+        lastSynced = preferenceManager.findPreference("google_last_sync")
+
+        viewModel.lastSyncTimeLiveData.observe(viewLifecycleOwner, { time ->
+            if (time > 0) {
+                lastSynced?.summary = formatDateTime(requireContext(), DateTime(time), false)
+                lastSynced?.isVisible = true
+            }
+        })
+
+        viewModel.messageLiveData.observe(viewLifecycleOwner, {
+            val msg = it.getContent()
+            if (msg != null) {
+                showMessage(msg)
+            }
+        })
 
         viewModel.showProgressBarLiveData.observe(viewLifecycleOwner) {
             binding.progressBar.setVisible(it)
@@ -144,6 +191,8 @@ class MainPreferencesFragment : PreferenceFragmentCompat(), OnConfirmListener {
     override fun onConfirm(tag: String?) {
         when (tag) {
             "import_backup" -> startActivityForResult(viewModel.startImportFromFile(), CODE_PICK_FILE)
+            "google_create_backup" -> viewModel.driveCreateBackup(this)
+            "google_import_backup" -> viewModel.driveImportBackup(this)
         }
     }
 }

@@ -5,6 +5,7 @@
     <string name="action_add_pulse">Pulse</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_charts">Charts</string>
+    <string name="action_create">Create</string>
     <string name="action_delete">Delete</string>
     <string name="action_import">Import</string>
     <string name="action_save">Save</string>
@@ -42,13 +43,12 @@
     <string name="main_pref_google_create_backup">Create backup</string>
     <string name="main_pref_google_import_backup">Import backup</string>
     <string name="main_pref_google_last_sync">Last sync</string>
-    <string name="main_pref_google_sign_in">Sign in</string>
-    <string name="main_pref_google_sign_out">Sign out</string>
     <string name="main_pref_import_backup">Import</string>
     <string name="main_pref_rate_app">Rate app</string>
     <string name="main_pref_reminder_evening">Evening</string>
     <string name="main_pref_reminder_morning">Morning</string>
     <string name="main_pref_theme">Theme</string>
+    <string name="message_drive_export">All data on Google Drive will be replaced.</string>
     <string name="message_import_backup">All data on this device will be replaced.</string>
     <string name="month_apr">April</string>
     <string name="month_aug">August</string>

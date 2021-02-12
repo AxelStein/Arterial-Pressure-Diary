@@ -14,63 +14,19 @@
         app:title="@string/main_pref_theme"/>
 
     <PreferenceCategory
-        app:isPreferenceVisible="false"
         app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false"
         app:title="@string/main_pref_category_reminders">
 
         <SwitchPreference
+            app:iconSpaceReserved="false"
             app:key="reminder_morning"
-            app:title="@string/main_pref_reminder_morning"
-            app:iconSpaceReserved="false"/>
+            app:title="@string/main_pref_reminder_morning"/>
 
         <SwitchPreference
+            app:iconSpaceReserved="false"
             app:key="reminder_evening"
-            app:title="@string/main_pref_reminder_evening"
-            app:iconSpaceReserved="false"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        app:isPreferenceVisible="false"
-        app:iconSpaceReserved="false"
-        app:title="@string/main_pref_category_google">
-
-        <Preference
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false"
-            app:key="google_sign_in"
-            app:title="@string/main_pref_google_sign_in"
-            tools:isPreferenceVisible="true" />
-
-        <Preference
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false"
-            app:key="google_create_backup"
-            app:title="@string/main_pref_google_create_backup"
-            tools:isPreferenceVisible="true" />
-
-        <Preference
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false"
-            app:key="google_import_backup"
-            app:title="@string/main_pref_google_import_backup"
-            tools:isPreferenceVisible="true" />
-
-        <Preference
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false"
-            app:key="google_last_sync"
-            app:title="@string/main_pref_google_last_sync"
-            tools:isPreferenceVisible="true"
-            tools:summary="24 May, 13:30" />
-
-        <Preference
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false"
-            app:key="google_sign_out"
-            app:title="@string/main_pref_google_sign_out"
-            tools:isPreferenceVisible="true"
-            tools:summary="diefaust1993@gmail.com" />
+            app:title="@string/main_pref_reminder_evening"/>
 
     </PreferenceCategory>
 
@@ -87,6 +43,30 @@
             app:iconSpaceReserved="false"
             app:key="import_backup"
             app:title="@string/main_pref_import_backup"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/main_pref_category_google">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="google_create_backup"
+            app:title="@string/main_pref_google_create_backup" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="google_import_backup"
+            app:title="@string/main_pref_google_import_backup" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
+            app:key="google_last_sync"
+            app:title="@string/main_pref_google_last_sync"
+            tools:isPreferenceVisible="true"
+            tools:summary="24 May, 13:30" />
 
     </PreferenceCategory>
 

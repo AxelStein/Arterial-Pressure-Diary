@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.axel_stein.ap_diary.data.AppResources
 import com.axel_stein.ap_diary.data.AppSettings
+import com.axel_stein.ap_diary.data.google_drive.DriveWorkerScheduler
 import com.axel_stein.ap_diary.data.google_drive.GoogleDriveService
 import com.axel_stein.ap_diary.data.room.AppDatabase
 import com.axel_stein.ap_diary.data.room.dao.LogDao
@@ -71,4 +72,8 @@ class AppModule(private val context: Context) {
             )
             .create()
     }
+
+    @Provides
+    @Singleton
+    fun provideDriveScheduler() = DriveWorkerScheduler(context)
 }

@@ -5,6 +5,7 @@
     <string name="action_add_pulse">Пульс</string>
     <string name="action_cancel">Отмена</string>
     <string name="action_charts">Графики</string>
+    <string name="action_create">Создать</string>
     <string name="action_delete">Удалить</string>
     <string name="action_import">Импорт</string>
     <string name="action_save">Сохранить</string>
@@ -12,6 +13,11 @@
     <string name="action_sign_in_google">Войти с аккаунта Google</string>
     <string name="action_skip">Пропустить</string>
     <string name="app_name">Дневник давления</string>
+    <string name="category_crisis">Гипертензивный криз. Немедленно обратитесь к врачу!</string>
+    <string name="category_elevated">Повышено</string>
+    <string name="category_normal">Норма</string>
+    <string name="category_stage_1">Высокое артериальное давление, стадия 1</string>
+    <string name="category_stage_2">Высокое артериальное давление, стадия 2</string>
     <string name="dialog_msg_backup_created">Резервная копия создана</string>
     <string name="dialog_msg_delete_log">Запись будет удалена навсегда.</string>
     <string name="dialog_msg_import_completed">Импорт завершен</string>
@@ -32,16 +38,15 @@
     <string name="main_pref_category_backup">Резервная копия</string>
     <string name="main_pref_category_reminders">Напоминания</string>
     <string name="main_pref_export_backup">Экспорт</string>
-    <string name="main_pref_google_create_backup">Создать</string>
-    <string name="main_pref_google_import_backup">Импортировать</string>
+    <string name="main_pref_google_create_backup">Создать резервную копию</string>
+    <string name="main_pref_google_import_backup">Импортировать резервную копию</string>
     <string name="main_pref_google_last_sync">Синхронизировано</string>
-    <string name="main_pref_google_sign_in">Войти</string>
-    <string name="main_pref_google_sign_out">Выйти</string>
     <string name="main_pref_import_backup">Импорт</string>
     <string name="main_pref_rate_app">Оценить приложение</string>
     <string name="main_pref_reminder_evening">Вечер</string>
     <string name="main_pref_reminder_morning">Утро</string>
     <string name="main_pref_theme">Тема</string>
+    <string name="message_drive_export">Все данные на Google Диске будут заменены.</string>
     <string name="message_import_backup">Все данные на устройстве будут заменены.</string>
     <string name="month_apr">Апрель</string>
     <string name="month_aug">Август</string>
@@ -64,9 +69,4 @@
     <string name="theme_dark">Темная</string>
     <string name="theme_light">Светлая</string>
     <string name="theme_system">Настройки системы</string>
-    <string name="category_normal">Норма</string>
-    <string name="category_elevated">Повышено</string>
-    <string name="category_stage_1">Высокое артериальное давление, стадия 1</string>
-    <string name="category_stage_2">Высокое артериальное давление, стадия 2</string>
-    <string name="category_crisis">Гипертензивный криз. Немедленно обратитесь к врачу!</string>
 </resources>

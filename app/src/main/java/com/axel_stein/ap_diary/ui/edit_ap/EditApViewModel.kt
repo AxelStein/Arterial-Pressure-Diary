@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.axel_stein.ap_diary.R
+import com.axel_stein.ap_diary.data.google_drive.DriveWorkerScheduler
 import com.axel_stein.ap_diary.data.room.dao.ApLogDao
 import com.axel_stein.ap_diary.data.room.model.ApLog
 import com.axel_stein.ap_diary.ui.App
@@ -42,6 +43,7 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
     val actionFinishLiveData: LiveData<Event<Boolean>> = actionFinish
 
     private lateinit var dao: ApLogDao
+    private lateinit var scheduler: DriveWorkerScheduler
     private val disposables = CompositeDisposable()
 
     init {
@@ -50,8 +52,9 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
     }
 
     @Inject
-    fun inject(dao: ApLogDao) {
+    fun inject(dao: ApLogDao, scheduler: DriveWorkerScheduler) {
         this.dao = dao
+        this.scheduler = scheduler
     }
 
     fun setDate(year: Int, month: Int, dayOfMonth: Int) {
@@ -170,6 +173,7 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
         Completable.fromAction {
             dao.upsert(apData.get())
         }.subscribeOn(io()).subscribe({
+            scheduler.schedule()
             showMessage.postValue(Event(R.string.msg_log_saved))
             actionFinish.postValue(Event())
         }, {
@@ -183,6 +187,7 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
             .subscribeOn(io())
             .subscribe(
                 {
+                    scheduler.schedule()
                     showMessage.postValue(Event(R.string.msg_log_deleted))
                     actionFinish.postValue(Event())
                 },
