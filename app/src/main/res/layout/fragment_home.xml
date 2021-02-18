@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/toolbarBackgroundColor"
-            app:contentInsetStart="0dp"
             app:menu="@menu/fragment_home"
             app:popupTheme="@style/Theme.ArterialPressureDiary.PopupOverlay">
 

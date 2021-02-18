@@ -106,6 +106,13 @@ class HomeFragment : Fragment() {
 
         viewModel.yearMonthListLiveData.observe(viewLifecycleOwner) {
             binding.spinnerDate.setVisible(!it.isNullOrEmpty())
+            binding.toolbar.setContentInsetsRelative(
+                if (!it.isNullOrEmpty()) 0
+                else Integer.MIN_VALUE,
+                Integer.MIN_VALUE
+            )
+            binding.toolbar.title = if (!it.isNullOrEmpty()) { "" } else { getString(R.string.app_name) }
+            binding.toolbar.invalidate()
             binding.noData.setVisible(it.isNullOrEmpty())
             binding.spinnerDate.adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, it).apply {
                 setDropDownViewResource(R.layout.item_popup)
