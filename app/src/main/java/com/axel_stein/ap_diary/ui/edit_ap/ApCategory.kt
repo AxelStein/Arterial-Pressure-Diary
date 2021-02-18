@@ -2,10 +2,9 @@ package com.axel_stein.ap_diary.ui.edit_ap
 
 enum class ApCategory {
     NORMAL,
-    ELEVATED,
-    STAGE_1,
-    STAGE_2,
-    CRISIS,
+    HIGH_NORMAL,
+    GRADE_1,
+    GRADE_2,
     NONE;
 
     companion object {

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <color name="color_category_crisis_day">#B71C1C</color>
-    <color name="color_category_crisis_night">#FF1744</color>
     <color name="color_category_elevated_day">#FBC02D</color>
     <color name="color_category_elevated_night">#FFFF00</color>
     <color name="color_category_normal_day">#4CAF50</color>

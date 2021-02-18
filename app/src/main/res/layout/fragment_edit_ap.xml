@@ -169,8 +169,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_layout_comment"
-                tools:text="@string/category_crisis"
-                tools:textColor="?attr/colorCategoryCrisis"/>
+                tools:text="@string/category_normal"
+                tools:textColor="?attr/colorCategoryNormal"/>
 
             <TextView
                 android:id="@+id/error_loading"

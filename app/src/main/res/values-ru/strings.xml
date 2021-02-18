@@ -13,11 +13,10 @@
     <string name="action_sign_in_google">Войти с аккаунта Google</string>
     <string name="action_skip">Пропустить</string>
     <string name="app_name">Дневник давления</string>
-    <string name="category_crisis">Гипертензивный криз. Немедленно обратитесь к врачу!</string>
-    <string name="category_elevated">Повышено</string>
+    <string name="category_elevated">Высокое нормальное</string>
     <string name="category_normal">Норма</string>
-    <string name="category_stage_1">Высокое артериальное давление, стадия 1</string>
-    <string name="category_stage_2">Высокое артериальное давление, стадия 2</string>
+    <string name="category_grade_1">Высокое артериальное давление, 1 степень</string>
+    <string name="category_grade_2">Высокое артериальное давление, 2 степень</string>
     <string name="dialog_msg_backup_created">Резервная копия создана</string>
     <string name="dialog_msg_delete_log">Запись будет удалена навсегда.</string>
     <string name="dialog_msg_import_completed">Импорт завершен</string>

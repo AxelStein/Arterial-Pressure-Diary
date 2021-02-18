@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <attr format="color|reference" name="chartTextColor"/>
-    <attr format="color|reference" name="colorCategoryCrisis"/>
     <attr format="color|reference" name="colorCategoryElevated"/>
     <attr format="color|reference" name="colorCategoryNormal"/>
     <attr format="color|reference" name="colorCategoryStage1"/>

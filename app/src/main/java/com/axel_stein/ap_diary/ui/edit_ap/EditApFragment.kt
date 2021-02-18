@@ -121,10 +121,9 @@ class EditApFragment : Fragment(), OnConfirmListener {
         viewModel.categoryLiveData.observe(viewLifecycleOwner) {
             val (text, color) = when (it) {
                 NORMAL -> R.string.category_normal to getColor(view, R.attr.colorCategoryNormal)
-                ELEVATED -> R.string.category_elevated to getColor(view, R.attr.colorCategoryElevated)
-                STAGE_1 -> R.string.category_stage_1 to getColor(view, R.attr.colorCategoryStage1)
-                STAGE_2 -> R.string.category_stage_2 to getColor(view, R.attr.colorCategoryStage2)
-                CRISIS -> R.string.category_crisis to getColor(view, R.attr.colorCategoryCrisis)
+                HIGH_NORMAL -> R.string.category_elevated to getColor(view, R.attr.colorCategoryElevated)
+                GRADE_1 -> R.string.category_grade_1 to getColor(view, R.attr.colorCategoryStage1)
+                GRADE_2 -> R.string.category_grade_2 to getColor(view, R.attr.colorCategoryStage2)
                 else -> 0 to 0
             }
 

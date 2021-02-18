@@ -9,7 +9,7 @@ import com.axel_stein.ap_diary.data.google_drive.DriveWorkerScheduler
 import com.axel_stein.ap_diary.data.room.dao.ApLogDao
 import com.axel_stein.ap_diary.data.room.model.ApLog
 import com.axel_stein.ap_diary.ui.App
-import com.axel_stein.ap_diary.ui.edit_ap.ApCategory.NONE
+import com.axel_stein.ap_diary.ui.edit_ap.ApCategory.*
 import com.axel_stein.ap_diary.ui.utils.Event
 import com.axel_stein.ap_diary.ui.utils.get
 import com.axel_stein.ap_diary.ui.utils.hasValue
@@ -115,21 +115,22 @@ class EditApViewModel(private val id: Long = 0L, state: SavedStateHandle, app: A
             return
         }
 
-        val checkSystolic = when {
-            systolic < 120 -> 0 // normal
-            systolic in 120..129 -> 1 // elevated
-            systolic in 130..139 -> 2 // stage 1
-            systolic in 140..179 -> 3 // stage 2
-            else -> 4 // crisis
+        val systolicCategory = when {
+            systolic < 130 -> NORMAL.ordinal
+            systolic in 130..139 -> HIGH_NORMAL.ordinal
+            systolic in 140..159 -> GRADE_1.ordinal
+            systolic >= 160 -> GRADE_2.ordinal
+            else -> NONE.ordinal
         }
-        val checkDiastolic = when {
-            diastolic < 80 -> 0 // normal
-            diastolic in 80..89 -> 2 // stage 1
-            diastolic in 90..119 -> 3 // stage 2
-            else -> 4 // crisis
+        val diastolicCategory = when {
+            diastolic < 85 -> NORMAL.ordinal
+            diastolic in 85..89 -> HIGH_NORMAL.ordinal
+            diastolic in 90..99 -> GRADE_1.ordinal
+            diastolic >= 100 -> GRADE_2.ordinal
+            else -> NONE.ordinal
         }
 
-        val category = max(checkSystolic, checkDiastolic)
+        val category = max(systolicCategory, diastolicCategory)
         categoryData.value = ApCategory.fromInt(category)
     }
 

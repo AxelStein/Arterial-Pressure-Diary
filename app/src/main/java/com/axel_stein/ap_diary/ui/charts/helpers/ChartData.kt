@@ -62,7 +62,7 @@ class ChartData {
 
         val systolicEntries = inflater.getEntries()
         labels = inflater.getLabels()
-        limits = arrayListOf(80f, 120f, 130f, 140f, 180f)
+        limits = arrayListOf(85f, 90f, 100f, 130f, 140f, 160f)
 
         val diastolicEntries = sortedList.mapIndexed { index, log ->
             Entry(index.toFloat(), log.diastolic.toFloat())

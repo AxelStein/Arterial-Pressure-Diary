@@ -11,7 +11,6 @@
         <item name="colorCategoryElevated">@color/color_category_elevated_night</item>
         <item name="colorCategoryStage1">@color/color_category_stage_1_night</item>
         <item name="colorCategoryStage2">@color/color_category_stage_2_night</item>
-        <item name="colorCategoryCrisis">@color/color_category_crisis_night</item>
         <item name="pulseLineColor">@color/color_pulse_line_night</item>
         <item name="systolicLineColor">@color/color_systolic_line_night</item>
         <item name="diastolicLineColor">@color/color_diastolic_line_night</item>
